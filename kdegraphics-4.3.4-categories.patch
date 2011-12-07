@@ -1,0 +1,10 @@
+diff -up kdegraphics-4.3.4/okular/shell/okular.desktop.than kdegraphics-4.3.4/okular/shell/okular.desktop
+--- kdegraphics-4.3.4/okular/shell/okular.desktop.than	2010-05-20 11:24:59.000000000 +0200
++++ kdegraphics-4.3.4/okular/shell/okular.desktop	2010-05-20 11:25:11.000000000 +0200
+@@ -111,5 +111,5 @@ Icon=okular
+ Type=Application
+ X-DocPath=okular/index.html
+ InitialPreference=7
+-Categories=Qt;KDE;Graphics;Office;Viewer;
++Categories=Qt;KDE;Graphics;Viewer;
+ MimeType=application/vnd.kde.okular-archive;

@@ -1,0 +1,2223 @@
+diff -Nur kdegraphics-4.3.4/gwenview/app/gwenview.desktop kdegraphics-4.3.5/gwenview/app/gwenview.desktop
+--- kdegraphics-4.3.4/gwenview/app/gwenview.desktop	2009-11-27 14:03:13.000000000 +0100
++++ kdegraphics-4.3.5/gwenview/app/gwenview.desktop	2010-01-21 21:47:46.000000000 +0100
+@@ -4,6 +4,7 @@
+ Name[be]=Gwenview
+ Name[bg]=Gwenview
+ Name[ca]=Gwenview
++Name[ca@valencia]=Gwenview
+ Name[cs]=Gwenview
+ Name[da]=Gwenview
+ Name[de]=Gwenview
+@@ -19,6 +20,7 @@
+ Name[gl]=Gwenview
+ Name[hi]=ग्वेन-व्यू
+ Name[hne]=ग्वेन-व्यू
++Name[hr]=Gwenview
+ Name[hu]=Gwenview
+ Name[is]=Gwenview
+ Name[it]=Gwenview
+@@ -60,6 +62,7 @@
+ GenericName[be]=Праглядчык відарысаў
+ GenericName[br]=Gweler ar skeudennoù
+ GenericName[ca]=Visor d'imatges
++GenericName[ca@valencia]=Visor d'imatges
+ GenericName[cs]=Prohlížeč obrázků
+ GenericName[cy]=Gwelydd Delweddau
+ GenericName[da]=Billedfremviser
+@@ -123,6 +126,7 @@
+ Comment=A simple image viewer
+ Comment[ar]=عارض صور بسيط
+ Comment[ca]=Un visualitzador d'imatges senzill
++Comment[ca@valencia]=Un visualitzador d'imatges senzill
+ Comment[cs]=Jednoduchý prohlížeč obrázků
+ Comment[da]=Simpel billedfremviser
+ Comment[de]=Ein einfacher Bildbetrachter
+@@ -138,6 +142,7 @@
+ Comment[gl]=Un visor de imaxes
+ Comment[hi]=एक सरल चित्र प्रदर्शक
+ Comment[hne]=एक सरल फोटू प्रदर्सक
++Comment[hr]=Jednostavni preglednik slika
+ Comment[hu]=Egyszerű képnézegető
+ Comment[is]=Einfaldur myndskoðari
+ Comment[it]=Un semplice visore di immagini
+diff -Nur kdegraphics-4.3.4/gwenview/app/slideshow.desktop kdegraphics-4.3.5/gwenview/app/slideshow.desktop
+--- kdegraphics-4.3.4/gwenview/app/slideshow.desktop	2009-11-27 14:03:13.000000000 +0100
++++ kdegraphics-4.3.5/gwenview/app/slideshow.desktop	2010-01-21 21:47:46.000000000 +0100
+@@ -7,6 +7,7 @@
+ Name=Start a Slideshow
+ Name[ar]=ابدأ عرض شرائح
+ Name[ca]=Inicia una presentació amb diapositives
++Name[ca@valencia]=Inicia una presentació amb diapositives
+ Name[cs]=Spustit promítání
+ Name[da]=Start et diasshow
+ Name[de]=Diaschau starten
+@@ -19,6 +20,7 @@
+ Name[ga]=Rith Taispeántas Sleamhnán
+ Name[gl]=Iniciar unha presentación
+ Name[hne]=स्लाइड सो चालू करव
++Name[hr]=Pokreni prezentaciju
+ Name[hu]=Diavetítés
+ Name[is]=Hefja skyggnusýningu
+ Name[it]=Avvia una presentazione
+diff -Nur kdegraphics-4.3.4/gwenview/lib/crop/croptool.cpp kdegraphics-4.3.5/gwenview/lib/crop/croptool.cpp
+--- kdegraphics-4.3.4/gwenview/lib/crop/croptool.cpp	2009-10-02 10:20:18.000000000 +0200
++++ kdegraphics-4.3.5/gwenview/lib/crop/croptool.cpp	2010-01-21 21:47:46.000000000 +0100
+@@ -331,7 +331,9 @@
+ 	QRect imageRect = imageView()->rect();
+ 
+ 	static const QColor outerColor  = QColor::fromHsvF(0, 0, 0, 0.5);
+-	static const QColor borderColor = QColor::fromHsvF(0, 0, 1.0, 0.66);
++	// For some reason nothing gets drawn if borderColor is not fully opaque!
++	//static const QColor borderColor = QColor::fromHsvF(0, 0, 1.0, 0.66);
++	static const QColor borderColor = QColor::fromHsvF(0, 0, 1.0);
+ 	static const QColor fillColor   = QColor::fromHsvF(0, 0, 0.75, 0.66);
+ 
+ 	QRegion outerRegion = QRegion(imageRect) - QRegion(rect);
+diff -Nur kdegraphics-4.3.4/gwenview/part/gvpart.desktop kdegraphics-4.3.5/gwenview/part/gvpart.desktop
+--- kdegraphics-4.3.4/gwenview/part/gvpart.desktop	2009-11-27 14:03:13.000000000 +0100
++++ kdegraphics-4.3.5/gwenview/part/gvpart.desktop	2010-01-21 21:47:46.000000000 +0100
+@@ -4,6 +4,7 @@
+ Name[ar]=جوِينفيو مستعرض الصورة
+ Name[bg]=KView Image Viewer
+ Name[ca]=Visualitzador d'imatges Gwenview
++Name[ca@valencia]=Visualitzador d'imatges Gwenview
+ Name[cs]=Prohlížeč obrázků Gwenview
+ Name[da]=Gwenview billedfremviser
+ Name[de]=Gwenview Bildbetrachter
+@@ -20,6 +21,7 @@
+ Name[gl]=Visor de imaxes Gwenview
+ Name[hi]=ग्वेन-व्यू छवि प्रदर्शक
+ Name[hne]=ग्वेन-व्यू फोटू प्रदर्सक
++Name[hr]=Preglednik slika Gwenview
+ Name[hu]=Gwenview képnézegető
+ Name[is]=Gwenview myndskoðari
+ Name[it]=Visore di immagini Gwenview
+diff -Nur kdegraphics-4.3.4/kamera/kcontrol/kamera.desktop kdegraphics-4.3.5/kamera/kcontrol/kamera.desktop
+--- kdegraphics-4.3.4/kamera/kcontrol/kamera.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/kamera/kcontrol/kamera.desktop	2010-01-21 21:47:48.000000000 +0100
+@@ -5,6 +5,7 @@
+ Comment[bg]=Настройване на цифров фотоапарат
+ Comment[br]=Kefluniañ Kamera
+ Comment[ca]=Configura el Kamera
++Comment[ca@valencia]=Configura el Kamera
+ Comment[cs]=Nastavení fotoaparátu
+ Comment[cy]=Ffurfweddu Kamera
+ Comment[da]=Indstil kamera
+@@ -121,6 +122,7 @@
+ Name[bg]=Фотоапарат
+ Name[br]=Kamera niverel
+ Name[ca]=Càmera digital
++Name[ca@valencia]=Càmera digital
+ Name[cs]=Digitální fotoaparát
+ Name[cy]=Camera Digidol
+ Name[da]=Digitalt kamera
+@@ -139,7 +141,7 @@
+ Name[he]=מצלמה דיגיטלית
+ Name[hi]=डिजिटल कैमरा
+ Name[hne]=डिजिटल कैमरा
+-Name[hr]=Digitalna kamera
++Name[hr]=Digitalni fotoaparat
+ Name[hu]=Fényképezőgép
+ Name[is]=Stafræn myndavél
+ Name[it]=Macchina fotografica digitale
+diff -Nur kdegraphics-4.3.4/kamera/kcontrol/kameradevice.cpp kdegraphics-4.3.5/kamera/kcontrol/kameradevice.cpp
+--- kdegraphics-4.3.4/kamera/kcontrol/kameradevice.cpp	2009-07-21 17:20:58.000000000 +0200
++++ kdegraphics-4.3.5/kamera/kcontrol/kameradevice.cpp	2010-01-21 21:47:48.000000000 +0100
+@@ -21,12 +21,11 @@
+ 
+ */
+ #include <qlayout.h>
+-#include <q3widgetstack.h>
++#include <QStackedWidget>
+ 
+ #include <qcombobox.h>
+ #include <qlineedit.h>
+ #include <qradiobutton.h>
+-#include <Q3Button>
+ 
+ #include <qlabel.h>
+ #include <q3grid.h>
+@@ -54,7 +53,7 @@
+ 
+ static const int INDEX_NONE= 0;
+ static const int INDEX_SERIAL = 1;
+-static const int INDEX_USB= 3;
++static const int INDEX_USB= 2;
+ static GPContext *glob_context = 0;
+ 
+ KCamera::KCamera(const QString &name, const QString &path)
+@@ -63,6 +62,7 @@
+ 	m_model	= name;
+ 	m_path	= path;
+ 	m_camera = NULL;
++	m_abilitylist = NULL;
+ }
+ 
+ KCamera::~KCamera()
+@@ -311,26 +311,36 @@
+ 	rightLayout->setMargin(0);
+ 	topLayout->addLayout( rightLayout );
+ 
+-	m_portSelectGroup = new Q3VButtonGroup(i18n("Port"), page);
++	m_portSelectGroup = new QGroupBox(i18n("Port"), page);
++        QVBoxLayout *vertLayout = new QVBoxLayout;
++        m_portSelectGroup->setLayout( vertLayout );
+ 	rightLayout->addWidget(m_portSelectGroup);
+-	m_portSettingsGroup = new Q3GroupBox(1, Qt::Horizontal,i18n("Port Settings"), page);
++	m_portSettingsGroup = new QGroupBox(i18n("Port Settings"), page);
++        QVBoxLayout *lay = new QVBoxLayout;
++        m_portSettingsGroup->setLayout( lay );
+ 	rightLayout->addWidget(m_portSettingsGroup);
+-
+ 	// Create port type selection radiobuttons.
+-	m_serialRB = new QRadioButton(i18n("Serial"), m_portSelectGroup);
+-	m_portSelectGroup->insert(m_serialRB, INDEX_SERIAL);
++	m_serialRB = new QRadioButton(i18n("Serial"));
++        vertLayout->addWidget(m_serialRB );
+ 	m_serialRB->setWhatsThis( i18n("If this option is checked, the camera has to be connected to one of the computer's serial ports (known as COM ports in Microsoft Windows.)"));
+-	m_USBRB = new QRadioButton(i18n("USB"), m_portSelectGroup);
+-	m_portSelectGroup->insert(m_USBRB, INDEX_USB);
++	m_USBRB = new QRadioButton(i18n("USB"));
++        vertLayout->addWidget(m_USBRB );
+ 	m_USBRB->setWhatsThis( i18n("If this option is checked, the camera has to be connected to one of the computer's USB ports, or to a USB hub."));
+ 	// Create port settings widget stack
+-	m_settingsStack = new Q3WidgetStack(m_portSettingsGroup);
+-	connect(m_portSelectGroup, SIGNAL(clicked(int)),
+-		m_settingsStack, SLOT(raiseWidget(int)));
+-
++        m_settingsStack = new  QStackedWidget;
++	Q3Grid *grid2 = new Q3Grid(2, m_settingsStack);
++        grid2->setSpacing(KDialog::spacingHint());
++        new QLabel(i18n("Port"), grid2);
++
++        lay->addWidget(grid2);
++        lay->addWidget( m_settingsStack );
++	connect(m_serialRB, SIGNAL( toggled(bool) ),
++                this, SLOT( changeCurrentIndex() ) );
++	connect(m_USBRB, SIGNAL( toggled(bool) ),
++                this, SLOT( changeCurrentIndex() ) );
+ 	// none tab
+-	m_settingsStack->addWidget(new QLabel(i18n("No port type selected."),
+-		m_settingsStack), INDEX_NONE);
++	m_settingsStack->insertWidget(INDEX_NONE, new QLabel(i18n("No port type selected."),
++		m_settingsStack));
+ 
+ 	// serial tab
+ 	Q3Grid *grid = new Q3Grid(2, m_settingsStack);
+@@ -339,15 +349,11 @@
+ 	m_serialPortCombo = new QComboBox(grid);
+ 	m_serialPortCombo->setEditable(true);
+ 	m_serialPortCombo->setWhatsThis( i18n("Specify here the serial port to which you connect the camera."));
+-	m_settingsStack->addWidget(grid, INDEX_SERIAL);
++	m_settingsStack->insertWidget(INDEX_SERIAL, grid);
+ 
+-	grid = new Q3Grid(2, m_settingsStack);
+-	grid->setSpacing(KDialog::spacingHint());
+-	new QLabel(i18n("Port"), grid);
+-
+-	m_settingsStack->addWidget(new
++	m_settingsStack->insertWidget(INDEX_USB, new
+ 		QLabel(i18n("No further configuration is required for USB cameras."),
+-		m_settingsStack), INDEX_USB);
++		m_settingsStack));
+ 
+ 	// query gphoto2 for existing serial ports
+ 	GPPortInfoList *list;
+@@ -376,6 +382,23 @@
+     m_portSettingsGroup->setEnabled( false );
+ }
+ 
++void KameraDeviceSelectDialog::changeCurrentIndex()
++{
++    QRadioButton *send = dynamic_cast<QRadioButton*>( sender() );
++    if ( send )
++    {
++        if ( send == m_serialRB )
++        {
++            m_settingsStack->setCurrentIndex( INDEX_SERIAL );
++        }
++        else if ( send == m_USBRB )
++        {
++
++            m_settingsStack->setCurrentIndex( INDEX_USB );
++        }
++    }
++}
++
+ bool KameraDeviceSelectDialog::populateCameraListView()
+ {
+ 	gp_abilities_list_new (&m_device->m_abilitylist);
+@@ -400,17 +423,10 @@
+ {
+ 	m_device->setModel(m_modelSel->currentItem()->text(0));
+ 
+-	if (m_portSelectGroup->selected()) {
+-		QString type = m_portSelectGroup->selected()->text();
+-
+-		if(type == i18n("Serial"))
++	if (m_serialRB->isChecked())
+ 			m_device->setPath("serial:" + m_serialPortCombo->currentText());
+-		else if(type == i18n("USB"))
++        else if ( m_USBRB->isChecked() )
+  			m_device->setPath("usb:");
+- 	} else {
+- 		// This camera has no port type (e.g. "Directory Browse" camera).
+- 		// Do nothing.
+- 	}
+ }
+ 
+ void KameraDeviceSelectDialog::load()
+@@ -450,12 +466,6 @@
+ 		// enable radiobuttons for supported port types
+ 		m_serialRB->setEnabled(abilities.port & GP_PORT_SERIAL);
+ 		m_USBRB->setEnabled(abilities.port & GP_PORT_USB);
+-
+-		// turn off any selected port
+-		QAbstractButton *selected = m_portSelectGroup->selected();
+-		if(selected != NULL)
+-			selected->toggle();
+-
+ 	        // if there's only one available port type, make sure it's selected
+ 		if (abilities.port == GP_PORT_SERIAL)
+ 			setPortType(INDEX_SERIAL);
+@@ -470,10 +480,13 @@
+ void KameraDeviceSelectDialog::setPortType(int type)
+ {
+ 	// Enable the correct button
+-	m_portSelectGroup->setButton(type);
++    if ( type == INDEX_USB )
++        m_USBRB->setChecked( true );
++    else if ( type == INDEX_SERIAL )
++        m_serialRB->setChecked( true );
+ 
+ 	// Bring the right tab to the front
+-	m_settingsStack->raiseWidget(type);
++    m_settingsStack->setCurrentIndex(type);
+ }
+ 
+ void KameraDeviceSelectDialog::slot_error(const QString &message)
+diff -Nur kdegraphics-4.3.4/kamera/kcontrol/kameradevice.h kdegraphics-4.3.5/kamera/kcontrol/kameradevice.h
+--- kdegraphics-4.3.4/kamera/kcontrol/kameradevice.h	2008-01-05 00:53:46.000000000 +0100
++++ kdegraphics-4.3.5/kamera/kcontrol/kameradevice.h	2010-01-21 21:47:48.000000000 +0100
+@@ -29,12 +29,12 @@
+ class KConfig;
+ class QString;
+ class K3ListView;
+-class Q3WidgetStack;
++class QStackedWidget;
+ class Q3VButtonGroup;
+ class QComboBox;
+ class QLineEdit;
+ class QRadioButton;
+-class Q3GroupBox;
++class QGroupBox;
+ 
+ class KCamera : public QObject {
+ 	friend class KameraDeviceSelectDialog;
+@@ -95,6 +95,7 @@
+ 	void slot_setModel(Q3ListViewItem *item);
+ 	void slot_error(const QString &message);
+ 	void slot_error(const QString &message, const QString &details);
++        void changeCurrentIndex();
+ protected:
+ 	KCamera *m_device;
+ 	
+@@ -104,9 +105,9 @@
+ 	// port settings widgets
+ 	K3ListView *m_modelSel;
+ 	QLineEdit *m_nameEdit;
+-	Q3WidgetStack *m_settingsStack;
+-	Q3VButtonGroup *m_portSelectGroup;
+-	Q3GroupBox *m_portSettingsGroup;
++	QStackedWidget *m_settingsStack;
++	QGroupBox *m_portSelectGroup;
++	QGroupBox *m_portSettingsGroup;
+ 	QComboBox *m_serialPortCombo;
+ 	// port selection radio buttons
+ 	QRadioButton *m_serialRB;
+diff -Nur kdegraphics-4.3.4/kamera/kioslave/kamera.cpp kdegraphics-4.3.5/kamera/kioslave/kamera.cpp
+--- kdegraphics-4.3.4/kamera/kioslave/kamera.cpp	2009-05-19 14:06:23.000000000 +0200
++++ kdegraphics-4.3.5/kamera/kioslave/kamera.cpp	2010-01-21 21:47:48.000000000 +0100
+@@ -441,6 +441,7 @@
+ 
+ 		QString xname = current_camera + "@" + current_port;
+ 		entry.insert( KIO::UDSEntry::UDS_NAME, xname);
++		entry.insert( KIO::UDSEntry::UDS_DISPLAY_NAME, current_camera);
+ 		entry.insert(KIO::UDSEntry::UDS_FILE_TYPE,S_IFDIR);
+ 		entry.insert(KIO::UDSEntry::UDS_ACCESS,(S_IRUSR | S_IRGRP | S_IROTH));
+ 		statEntry(entry);
+@@ -644,12 +645,9 @@
+ 			} else {
+ 				xname = (*it)+"@"+m_cfgPath;
+ 			}
+-			entry.insert(KIO::UDSEntry::UDS_NAME,*it);
+-
+-			KUrl nurl(yurl);
+-			nurl.setPath(xname);
+-
+-			entry.insert(KIO::UDSEntry::UDS_TARGET_URL,nurl.url());
++			entry.insert(KIO::UDSEntry::UDS_NAME,xname);
++			// do not confuse regular users with the @usb... 
++			entry.insert(KIO::UDSEntry::UDS_DISPLAY_NAME,*it);
+ 			listEntry(entry, false);
+ 		}
+ 
+@@ -658,12 +656,11 @@
+ 		for (portsit = ports.begin(); portsit != ports.end(); portsit++) {
+ 			entry.clear();
+ 			entry.insert(KIO::UDSEntry::UDS_FILE_TYPE,S_IFDIR);
+-			entry.insert(KIO::UDSEntry::UDS_NAME, portsit.value());
++			// do not confuse regular users with the @usb... 
++			entry.insert(KIO::UDSEntry::UDS_DISPLAY_NAME,portsit.value());
++			entry.insert(KIO::UDSEntry::UDS_NAME, portsit.value()+"@"+portsit.key());
+ 
+ 			entry.insert(KIO::UDSEntry::UDS_ACCESS,(S_IRUSR | S_IRGRP | S_IROTH |S_IWUSR | S_IWGRP | S_IWOTH));
+-			xurl.setProtocol("camera");
+-			xurl.setPath("/"+portsit.value()+"@"+portsit.key());
+-			entry.insert(KIO::UDSEntry::UDS_TARGET_URL,xurl.url());
+ 			listEntry(entry, false);
+ 		}
+ 		listEntry(entry, true);
+@@ -881,11 +878,7 @@
+ 	udsEntry.clear();
+ 
+ 	udsEntry.insert(KIO::UDSEntry::UDS_FILE_TYPE,S_IFREG);
+-
+-	if (info.file.fields & GP_FILE_INFO_NAME)
+-		udsEntry.insert(KIO::UDSEntry::UDS_NAME,QString::fromLocal8Bit(info.file.name));
+-	else
+-		udsEntry.insert(KIO::UDSEntry::UDS_NAME,name);
++	udsEntry.insert(KIO::UDSEntry::UDS_NAME,name);
+ 
+ 	if (info.file.fields & GP_FILE_INFO_SIZE) {
+ 		udsEntry.insert(KIO::UDSEntry::UDS_SIZE,info.file.size);
+diff -Nur kdegraphics-4.3.4/kcolorchooser/kcolorchooser.desktop kdegraphics-4.3.5/kcolorchooser/kcolorchooser.desktop
+--- kdegraphics-4.3.4/kcolorchooser/kcolorchooser.desktop	2009-10-02 10:20:20.000000000 +0200
++++ kdegraphics-4.3.5/kcolorchooser/kcolorchooser.desktop	2010-01-21 21:47:48.000000000 +0100
+@@ -10,6 +10,7 @@
+ GenericName[bg]=KColorChooser
+ GenericName[br]=Dibaber livioù
+ GenericName[ca]=Selector de colors
++GenericName[ca@valencia]=Selector de colors
+ GenericName[cs]=Výběr barev
+ GenericName[cy]=Dewis Lliwiau
+ GenericName[da]=Farvevælger
+@@ -78,6 +79,7 @@
+ Name[bg]=KColorChooser
+ Name[br]=KColorChooser
+ Name[ca]=KColorChooser
++Name[ca@valencia]=KColorChooser
+ Name[cs]=Výběr barev
+ Name[cy]=KDewisLliw
+ Name[da]=KColorChooser
+diff -Nur kdegraphics-4.3.4/kgamma/kcmkgamma/kgamma.desktop kdegraphics-4.3.5/kgamma/kcmkgamma/kgamma.desktop
+--- kdegraphics-4.3.4/kgamma/kcmkgamma/kgamma.desktop	2009-11-27 14:03:13.000000000 +0100
++++ kdegraphics-4.3.5/kgamma/kcmkgamma/kgamma.desktop	2010-01-21 21:47:46.000000000 +0100
+@@ -2,7 +2,8 @@
+ Comment=A monitor calibration tool
+ Comment[ar]=أداة مراقب المعايرة
+ Comment[bg]=Калибриране на монитора
+-Comment[ca]=Una eina de calibració del monitor
++Comment[ca]=Una eina de calibratge del monitor
++Comment[ca@valencia]=Una eina de calibratge del monitor
+ Comment[cs]=Nástroj pro kalibraci monitoru
+ Comment[cy]=Erfyn graddnodi dangosydd
+ Comment[da]=Et skærmkalibreringsværktøj
+@@ -20,6 +21,7 @@
+ Comment[gl]=Unha utilidade para calibrar o monitor
+ Comment[hi]=मॉनीटर केलिब्रेशन औज़ार
+ Comment[hne]=मानीटर केलिब्रेसन औजार
++Comment[hr]=Alat za uštimavanje monitora
+ Comment[hu]=Monitorbeállító program
+ Comment[is]=Tól til að stilla skjáinn
+ Comment[it]=Calibrazione del monitor
+@@ -64,6 +66,7 @@
+ Name[bg]=Гама
+ Name[br]=Gamma
+ Name[ca]=Gamma
++Name[ca@valencia]=Gamma
+ Name[cs]=Gama
+ Name[cy]=Gama
+ Name[da]=Gamma
+diff -Nur kdegraphics-4.3.4/kolourpaint/kolourpaint.desktop kdegraphics-4.3.5/kolourpaint/kolourpaint.desktop
+--- kdegraphics-4.3.4/kolourpaint/kolourpaint.desktop	2009-11-27 14:03:15.000000000 +0100
++++ kdegraphics-4.3.5/kolourpaint/kolourpaint.desktop	2010-01-21 21:47:48.000000000 +0100
+@@ -6,6 +6,7 @@
+ Name[bg]=KolourPaint
+ Name[br]=KolourPaint
+ Name[ca]=KolourPaint
++Name[ca@valencia]=KolourPaint
+ Name[cs]=KolourPaint
+ Name[cy]=KolourPaint
+ Name[da]=KolourPaint
+@@ -23,6 +24,7 @@
+ Name[he]=KolourPaint
+ Name[hi]=के-कलर-पेंट
+ Name[hne]=के-कलर-पेंट
++Name[hr]=KolourPaint
+ Name[hu]=KolourPaint
+ Name[is]=KolourPaint
+ Name[it]=KolourPaint
+@@ -70,6 +72,7 @@
+ GenericName[bg]=Графичен редактор
+ GenericName[br]=Goulev tresañ
+ GenericName[ca]=Programa de pintura
++GenericName[ca@valencia]=Programa de pintura
+ GenericName[cs]=Kreslící program
+ GenericName[cy]=Rhaglen Peintio
+ GenericName[da]=Maleprogram
+diff -Nur kdegraphics-4.3.4/kruler/kruler.desktop kdegraphics-4.3.5/kruler/kruler.desktop
+--- kdegraphics-4.3.4/kruler/kruler.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/kruler/kruler.desktop	2010-01-21 21:47:48.000000000 +0100
+@@ -4,6 +4,7 @@
+ GenericName[ar]=مسطرة الشاشة
+ GenericName[bg]=Линийка за екрана
+ GenericName[ca]=Regle de pantalla
++GenericName[ca@valencia]=Regle de pantalla
+ GenericName[cs]=Obrazovkové pravítko
+ GenericName[cy]=Mesurydd Sgrîn
+ GenericName[da]=Skærmlineal
+@@ -70,6 +71,7 @@
+ Name[bg]=KRuler
+ Name[br]=KRuler
+ Name[ca]=KRuler
++Name[ca@valencia]=KRuler
+ Name[cs]=KRuler
+ Name[cy]=KMesurydd
+ Name[da]=KRuler
+@@ -87,7 +89,7 @@
+ Name[he]=KRuler
+ Name[hi]=के-रूलर
+ Name[hne]=के-रूलर
+-Name[hr]=Ravnalo
++Name[hr]=KRuler
+ Name[hu]=KRuler
+ Name[is]=KReglustika
+ Name[it]=KRuler
+diff -Nur kdegraphics-4.3.4/kruler/kruler.notifyrc kdegraphics-4.3.5/kruler/kruler.notifyrc
+--- kdegraphics-4.3.4/kruler/kruler.notifyrc	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/kruler/kruler.notifyrc	2010-01-21 21:47:48.000000000 +0100
+@@ -4,6 +4,7 @@
+ Comment[af]=Kde Skerm Liniaal
+ Comment[ar]=مسطرة الشاشة لكدي
+ Comment[ca]=Regle de pantalla del KDE
++Comment[ca@valencia]=Regle de pantalla del KDE
+ Comment[cs]=Obrazovkové pravítko
+ Comment[cy]=Mesurydd Sgrîn KDE
+ Comment[da]=KDE Skærmlineal
+@@ -67,6 +68,7 @@
+ Name[af]=Verskuif deur Plekaanduier Sleutels
+ Name[ar]=حُرّك بمفاتيح المؤشر
+ Name[ca]=Es mou amb les tecles de cursor
++Name[ca@valencia]=Es mou amb les tecles de cursor
+ Name[cs]=Přesunutý kurzorovými klávesami
+ Name[cy]=Symudir gan y Bysellau Cyrchydd
+ Name[da]=Flyttet med piletaster
+@@ -124,6 +126,7 @@
+ Comment[af]=Die liniaal het verskuif beeldelement-gewys te gebruik Die plekaanduier sleutels
+ Comment[ar]=المسطرة تحركت في اتجاه البكسل باستخدام مفاتيح المؤشر
+ Comment[ca]=El regle es mou píxel a píxel amb les tecles de cursor
++Comment[ca@valencia]=El regle es mou píxel a píxel amb les tecles de cursor
+ Comment[cs]=Pravítko bylo kurzorovými klávesami posunuto o několik bodů
+ Comment[cy]=Mae'r mesurydd wedi symud o safbwynt picseli wrth ddefnyddio'r bysellau cyrchydd
+ Comment[da]=Linealen er flyttet en pixel af gangen med piletasterne
+diff -Nur kdegraphics-4.3.4/ksaneplugin/ksane_scan_service.desktop kdegraphics-4.3.5/ksaneplugin/ksane_scan_service.desktop
+--- kdegraphics-4.3.4/ksaneplugin/ksane_scan_service.desktop	2009-11-27 14:03:12.000000000 +0100
++++ kdegraphics-4.3.5/ksaneplugin/ksane_scan_service.desktop	2010-01-21 21:47:46.000000000 +0100
+@@ -6,6 +6,7 @@
+ Name[bg]=Услуга за сканиране
+ Name[br]=Damanterien skramm
+ Name[ca]=Servei d'escaneig del KDE
++Name[ca@valencia]=Servei d'escaneig del KDE
+ Name[cs]=Skenovací služba pro KDE
+ Name[cy]=Gwasanaeth Sganio KDE
+ Name[da]=KDE Skanneservice
+diff -Nur kdegraphics-4.3.4/ksnapshot/ksnapshot.desktop kdegraphics-4.3.5/ksnapshot/ksnapshot.desktop
+--- kdegraphics-4.3.4/ksnapshot/ksnapshot.desktop	2009-10-02 10:20:20.000000000 +0200
++++ kdegraphics-4.3.5/ksnapshot/ksnapshot.desktop	2010-01-21 21:47:48.000000000 +0100
+@@ -4,6 +4,7 @@
+ GenericName[ar]=برنامج التقاط الشاشة
+ GenericName[bg]=Снимки на екрана
+ GenericName[ca]=Programa de captura de pantalla
++GenericName[ca@valencia]=Programa de captura de pantalla
+ GenericName[cs]=Snímač obrazovky
+ GenericName[cy]=Rhaglen Cipio'r Sgrîn
+ GenericName[da]=Program til øjebliksbilleder
+@@ -72,6 +73,7 @@
+ Name[bg]=KSnapshot
+ Name[br]=KSnapshot
+ Name[ca]=KSnapshot
++Name[ca@valencia]=KSnapshot
+ Name[cs]=KSnapshot
+ Name[cy]=KCipluniau
+ Name[da]=KSnapshot
+diff -Nur kdegraphics-4.3.4/libs/libkipi/kipiplugin.desktop kdegraphics-4.3.5/libs/libkipi/kipiplugin.desktop
+--- kdegraphics-4.3.4/libs/libkipi/kipiplugin.desktop	2009-11-27 14:03:12.000000000 +0100
++++ kdegraphics-4.3.5/libs/libkipi/kipiplugin.desktop	2010-01-21 21:47:46.000000000 +0100
+@@ -5,6 +5,7 @@
+ Name=KIPIPlugin
+ Name[ar]=كايْبِيبْلوغِن
+ Name[ca]=KIPIPlugin
++Name[ca@valencia]=KIPIPlugin
+ Name[cs]=KIPIPlugin
+ Name[da]=KIPIPlugin
+ Name[de]=KIPI-Modul
+@@ -17,6 +18,7 @@
+ Name[ga]=KIPIPlugin
+ Name[gl]=KIPIPlugin
+ Name[hne]=केआईपीआईप्लगइन
++Name[hr]=KIPI-priključak
+ Name[hu]=KIPI-bővítmény
+ Name[is]=KIPI-íforrit
+ Name[it]=KIPIPlugin
+@@ -51,6 +53,7 @@
+ Comment=A KIPI Plugin
+ Comment[ar]=ملحق كايْبي
+ Comment[ca]=Un connector KIPI
++Comment[ca@valencia]=Un connector KIPI
+ Comment[cs]=KIPI modul
+ Comment[da]=Et KIPI-plugin
+ Comment[de]=Ein KIPI-Modul
+@@ -63,6 +66,7 @@
+ Comment[ga]=Breiseán KIPI
+ Comment[gl]=Unha extensión de KIPI
+ Comment[hne]=केआईपीआई प्लगइन
++Comment[hr]=KIPI-priključak
+ Comment[hu]=Egy KIPI-bővítmény
+ Comment[is]=KIPI íforrit
+ Comment[it]=Un plugin di KIPI
+diff -Nur kdegraphics-4.3.4/libs/libksane/libksane/ksane_widget_private.cpp kdegraphics-4.3.5/libs/libksane/libksane/ksane_widget_private.cpp
+--- kdegraphics-4.3.4/libs/libksane/libksane/ksane_widget_private.cpp	2009-11-27 14:03:13.000000000 +0100
++++ kdegraphics-4.3.5/libs/libksane/libksane/ksane_widget_private.cpp	2010-01-21 21:47:46.000000000 +0100
+@@ -622,26 +622,33 @@
+     }
+     
+     // set the resopution to 100 dpi and increase if necessary
+-    m_optRes->getMinValue(dpi);
+-    do {
+-        if (m_optRes != 0) {
++    if (m_optRes != 0) {
++        m_optRes->getMinValue(dpi);
++        do {
+             m_optRes->setValue(dpi);
++            if ((m_optResY != 0) && (m_optRes->name() == SANE_NAME_SCAN_X_RESOLUTION)) {
++                m_optResY->setValue(dpi);
++            }
++            //check what image size we would get in a scan
++            status = sane_get_parameters(m_saneHandle, &m_params);
++            if (status != SANE_STATUS_GOOD) {
++                kDebug(51004) << "sane_get_parameters=" << sane_strstatus(status);
++                scanDone();
++                return;
++            }
++            if (dpi > 300) break;
++            // Increase the dpi value
++            dpi += 25.0;
+         }
+-        if ((m_optResY != 0) && (m_optRes->name() == SANE_NAME_SCAN_X_RESOLUTION)) {
+-            m_optResY->setValue(dpi);
+-        }
+-        //check what image size we would get in a scan
+-        status = sane_get_parameters(m_saneHandle, &m_params);
+-        if (status != SANE_STATUS_GOOD) {
+-            kDebug(51004) << "sane_get_parameters=" << sane_strstatus(status);
+-            scanDone();
+-            return;
++        while ((m_params.pixels_per_line < 300) || (m_params.lines < 300));
++        
++        if (m_params.pixels_per_line == 0) {
++            // This is a security measure for broken backends
++            m_optRes->getMinValue(dpi);
++            m_optRes->setValue(dpi);
++            kDebug() << "Setting minimum DPI value for a broken back-end"; 
+         }
+-        if (dpi > 300) break;
+-        // Increase the dpi value
+-        dpi += 25.0;
+     }
+-    while ((m_params.pixels_per_line < 300) || (m_params.lines < 300));
+     
+     // set preview option to true if possible
+     if (m_optPreview != 0) m_optPreview->setValue(1);
+@@ -982,7 +989,7 @@
+             if (m_frameRead < m_frameSize) {
+                 kDebug(51004) << "frameRead =" << m_frameRead
+                 << ", frameSize =" << m_frameSize;
+-                m_readStatus = READ_ERROR;
++                m_readStatus = READ_FINISHED; // It is better to return a broken image than nothing
+                 scanDone();
+                 return;
+             }
+diff -Nur kdegraphics-4.3.4/okular/core/document.cpp kdegraphics-4.3.5/okular/core/document.cpp
+--- kdegraphics-4.3.4/okular/core/document.cpp	2009-11-27 14:03:13.000000000 +0100
++++ kdegraphics-4.3.5/okular/core/document.cpp	2010-01-21 21:47:47.000000000 +0100
+@@ -2207,7 +2207,7 @@
+     if ( requests.isEmpty() )
+         return;
+ 
+-    if ( !d->m_generator )
++    if ( !d->m_generator || d->m_closingLoop )
+     {
+         // delete requests..
+         QLinkedList< PixmapRequest * >::const_iterator rIt = requests.constBegin(), rEnd = requests.constEnd();
+diff -Nur kdegraphics-4.3.4/okular/core/okularGenerator.desktop kdegraphics-4.3.5/okular/core/okularGenerator.desktop
+--- kdegraphics-4.3.4/okular/core/okularGenerator.desktop	2009-11-27 14:03:13.000000000 +0100
++++ kdegraphics-4.3.5/okular/core/okularGenerator.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -4,6 +4,7 @@
+ Comment=File format backend for Okular
+ Comment[ar]=المنتهى الخلفي لـنسق الملف لأوكلار
+ Comment[ca]=Dorsal de format de fitxer per a l'Okular
++Comment[ca@valencia]=Dorsal de format de fitxer per a l'Okular
+ Comment[da]=Filformatmotor til Okular
+ Comment[de]=Dateiformat-Modul für Okular
+ Comment[el]=Σύστημα υποστήριξης μορφής αρχείων για το Okular
+@@ -16,6 +17,7 @@
+ Comment[ga]=Inneall formáide comhaid le haghaidh Okular
+ Comment[gl]=Infraestrutura dun formato de ficheiro para Okular
+ Comment[hne]=ओकुलर बर फाइल प्रारूप बैकएंड
++Comment[hr]=Podrška za oblike datoteka za Okular
+ Comment[hu]=Fájlformátumkezelő az Okularhoz
+ Comment[is]=Skráasniðsstuðningur fyrir Okular
+ Comment[it]=Backend per i formati di file di Okular
+diff -Nur kdegraphics-4.3.4/okular/core/version.h kdegraphics-4.3.5/okular/core/version.h
+--- kdegraphics-4.3.4/okular/core/version.h	2009-11-27 14:03:13.000000000 +0100
++++ kdegraphics-4.3.5/okular/core/version.h	2010-01-21 21:47:47.000000000 +0100
+@@ -10,10 +10,10 @@
+ #ifndef _OKULAR_VERSION_H_
+ #define _OKULAR_VERSION_H_
+ 
+-#define OKULAR_VERSION_STRING "0.9.4"
++#define OKULAR_VERSION_STRING "0.9.5"
+ #define OKULAR_VERSION_MAJOR 0
+ #define OKULAR_VERSION_MINOR 9
+-#define OKULAR_VERSION_RELEASE 4
++#define OKULAR_VERSION_RELEASE 5
+ #define OKULAR_MAKE_VERSION( a,b,c ) (((a) << 16) | ((b) << 8) | (c))
+ 
+ #define OKULAR_VERSION \
+diff -Nur kdegraphics-4.3.4/okular/generators/chm/kio-msits/msits.protocol kdegraphics-4.3.5/okular/generators/chm/kio-msits/msits.protocol
+--- kdegraphics-4.3.4/okular/generators/chm/kio-msits/msits.protocol	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/chm/kio-msits/msits.protocol	2010-01-21 21:47:47.000000000 +0100
+@@ -10,6 +10,7 @@
+ Description[ar]=خاصية كِييُوسليْف لعرض ملفات WinHelp
+ Description[bg]=kioslave за показване на помощни файлове за Уиндоус
+ Description[ca]=Un kioslave per visualitzar els fitxers WinHelp
++Description[ca@valencia]=Un kioslave per visualitzar els fitxers WinHelp
+ Description[da]=En kioslave til visning af WinHelp-filer
+ Description[de]=Ein-/Ausgabemodul zur Anzeige von Windows-Hilfe-Dateien
+ Description[el]=Ένα kioslave για την εμφάνιση αρχείων WinHelp
+@@ -24,6 +25,7 @@
+ Description[gl]=Un kioslave para mostrar ficheiros WinHelp
+ Description[hi]=विन-हेल्प फ़ाइलों को प्रदर्शित करने के लिए एक केआईओस्लेव
+ Description[hne]=विन-हेल्प फाइल मन ल प्रदर्सित करे बर एक केआईओस्लेव
++Description[hr]=kioslave za prikaz datoteka oblika WinHelp
+ Description[hu]=KDE-protokoll Windows súgófájlok megtekintéséhez
+ Description[is]=Kioslave tilað sýna WinHelp skrár
+ Description[it]=Un kioslave per visualizzare i file della guida di windows
+diff -Nur kdegraphics-4.3.4/okular/generators/chm/libokularGenerator_chmlib.desktop kdegraphics-4.3.5/okular/generators/chm/libokularGenerator_chmlib.desktop
+--- kdegraphics-4.3.4/okular/generators/chm/libokularGenerator_chmlib.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/chm/libokularGenerator_chmlib.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -4,6 +4,7 @@
+ Name[ar]=chmlib
+ Name[bg]=chmlib
+ Name[ca]=chmlib
++Name[ca@valencia]=chmlib
+ Name[cs]=chmlib
+ Name[da]=chmlib
+ Name[de]=chmlib
+@@ -19,6 +20,7 @@
+ Name[gl]=chmlib
+ Name[hi]=सीएचएमलिब
+ Name[hne]=सीएचएमलिब
++Name[hr]=chmlib
+ Name[hu]=chmlib
+ Name[is]=chmlib
+ Name[it]=chmlib
+@@ -55,6 +57,7 @@
+ Comment=Windows HTMLHelp backend for Okular
+ Comment[ar]=المنتهى الخلفي Windows HTMLHelp لأوكلار
+ Comment[ca]=Dorsal dels HTMLHelp de Windows per a l'Okular
++Comment[ca@valencia]=Dorsal dels HTMLHelp de Windows per a l'Okular
+ Comment[da]=Windows HTML Help-motor til Okular
+ Comment[de]=Anzeigemodul für Windows-Hilfe-Dateien in Okular
+ Comment[el]=Σύστημα υποστήριξης βοήθειας Windows σε HTML για το Okular
+@@ -67,6 +70,7 @@
+ Comment[ga]=Inneall HTMLHelp Windows le haghaidh Okular
+ Comment[gl]=Infraestrutura de ficheiros Windows HTMLHelp para Okular
+ Comment[hne]=ओकुलर बर विंडोज एचटीएमएलहेल्प बैकएन्ड
++Comment[hr]=Podrška za Windows HTMLHelp za Okular
+ Comment[hu]=Windows HTML-súgókezelő az Okularhoz
+ Comment[is]=Windows HTMLHelp stuðningur fyrir Okular
+ Comment[it]=Backend guida di Windows in HTML per Okular
+@@ -92,7 +96,7 @@
+ Comment[sv]=Windows HTMLHelp-gränssnitt för Okular
+ Comment[th]=แบ็คเอนต์แฟ้มช่วยเหลือแบบ HTML ของวินโดว์ส สำหรับ Okular
+ Comment[tr]=Okular için Windows HTMLHelp arka ucu
+-Comment[uk]=Втулка Windows HTMLHelp для okular
++Comment[uk]=Додаток Windows HTMLHelp для okular
+ Comment[x-test]=xxWindows HTMLHelp backend for Okularxx
+ Comment[zh_CN]=Okular 的 Windows HTMLHelp 格式后端
+ Comment[zh_TW]=Okular 的 Windows HTMLHelp 後端
+diff -Nur kdegraphics-4.3.4/okular/generators/chm/okularApplication_chm.desktop kdegraphics-4.3.5/okular/generators/chm/okularApplication_chm.desktop
+--- kdegraphics-4.3.4/okular/generators/chm/okularApplication_chm.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/chm/okularApplication_chm.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -4,6 +4,7 @@
+ Name=Okular
+ Name[ar]=اوكلار
+ Name[ca]=Okular
++Name[ca@valencia]=Okular
+ Name[cs]=Okular
+ Name[da]=Okular
+ Name[de]=Okular
+@@ -53,6 +54,7 @@
+ GenericName[ar]=عارض المستندات
+ GenericName[bg]=Визуализатор
+ GenericName[ca]=Visualitzador de documents
++GenericName[ca@valencia]=Visualitzador de documents
+ GenericName[cs]=Prohlížeč dokumentů
+ GenericName[da]=Dokumentfremviser
+ GenericName[de]=Dokumentenbetrachter
+@@ -69,6 +71,7 @@
+ GenericName[gl]=Visor de documentos
+ GenericName[hi]=दस्तावेज़ प्रदर्शक
+ GenericName[hne]=कागद प्रदर्सक
++GenericName[hr]=Preglednik dokumenata
+ GenericName[hu]=Dokumentumnézegető
+ GenericName[is]=Skjalaskoðari
+ GenericName[it]=Visore di documenti
+diff -Nur kdegraphics-4.3.4/okular/generators/chm/okularChm.desktop kdegraphics-4.3.5/okular/generators/chm/okularChm.desktop
+--- kdegraphics-4.3.4/okular/generators/chm/okularChm.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/chm/okularChm.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -3,6 +3,7 @@
+ Name=Okular
+ Name[ar]=اوكلار
+ Name[ca]=Okular
++Name[ca@valencia]=Okular
+ Name[cs]=Okular
+ Name[da]=Okular
+ Name[de]=Okular
+diff -Nur kdegraphics-4.3.4/okular/generators/comicbook/libokularGenerator_comicbook.desktop kdegraphics-4.3.5/okular/generators/comicbook/libokularGenerator_comicbook.desktop
+--- kdegraphics-4.3.4/okular/generators/comicbook/libokularGenerator_comicbook.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/comicbook/libokularGenerator_comicbook.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -4,6 +4,7 @@
+ Name[ar]=كوميك بوك
+ Name[bg]=Comic Book
+ Name[ca]=Comic Book
++Name[ca@valencia]=Comic Book
+ Name[cs]=Kniha komixů
+ Name[da]=Comic Book
+ Name[de]=Comicbook
+@@ -55,6 +56,7 @@
+ Comment=Comic book backend for Okular
+ Comment[ar]=المنتهى الخلفي Comic book لأوكلار
+ Comment[ca]=Dorsal de Comic book per a l'Okular
++Comment[ca@valencia]=Dorsal de Comic book per a l'Okular
+ Comment[da]=Comic book-motor til Okular
+ Comment[de]=Anzeigemodul für Comicbook in Okular
+ Comment[el]=Σύστημα υποστήριξης βιβλίων κόμικ για το Okular
+@@ -67,6 +69,7 @@
+ Comment[ga]=Inneall Comic Book le haghaidh Okular
+ Comment[gl]=Infraestruturas de banda deseñada para Okular
+ Comment[hne]=ओकुलर बर कामिक बुक बैकएन्ड
++Comment[hr]=Podrška za stripove za Okular
+ Comment[hu]=Képregényolvasó bővítmény az Okularhoz
+ Comment[is]=ComicBook stuðningur fyrir Okular
+ Comment[it]=Backend Comic book per Okular
+@@ -92,7 +95,7 @@
+ Comment[sv]=Seriebokgränssnitt för Okular
+ Comment[th]=แบ็คเอนต์หนังสือการ์ตูนสำหรับ Okular
+ Comment[tr]=Okular için Comic book arka ucu
+-Comment[uk]=Втулка коміксів для Okular
++Comment[uk]=Додаток коміксів для Okular
+ Comment[wa]=Programe fondmint d' Okular po les bindes d' imådjes
+ Comment[x-test]=xxComic book backend for Okularxx
+ Comment[zh_CN]=Okular 的 Comic book 格式后端
+diff -Nur kdegraphics-4.3.4/okular/generators/comicbook/okularApplication_comicbook.desktop kdegraphics-4.3.5/okular/generators/comicbook/okularApplication_comicbook.desktop
+--- kdegraphics-4.3.4/okular/generators/comicbook/okularApplication_comicbook.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/comicbook/okularApplication_comicbook.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -4,6 +4,7 @@
+ Name=Okular
+ Name[ar]=اوكلار
+ Name[ca]=Okular
++Name[ca@valencia]=Okular
+ Name[cs]=Okular
+ Name[da]=Okular
+ Name[de]=Okular
+@@ -53,6 +54,7 @@
+ GenericName[ar]=عارض المستندات
+ GenericName[bg]=Визуализатор
+ GenericName[ca]=Visualitzador de documents
++GenericName[ca@valencia]=Visualitzador de documents
+ GenericName[cs]=Prohlížeč dokumentů
+ GenericName[da]=Dokumentfremviser
+ GenericName[de]=Dokumentenbetrachter
+@@ -69,6 +71,7 @@
+ GenericName[gl]=Visor de documentos
+ GenericName[hi]=दस्तावेज़ प्रदर्शक
+ GenericName[hne]=कागद प्रदर्सक
++GenericName[hr]=Preglednik dokumenata
+ GenericName[hu]=Dokumentumnézegető
+ GenericName[is]=Skjalaskoðari
+ GenericName[it]=Visore di documenti
+diff -Nur kdegraphics-4.3.4/okular/generators/comicbook/okularComicbook.desktop kdegraphics-4.3.5/okular/generators/comicbook/okularComicbook.desktop
+--- kdegraphics-4.3.4/okular/generators/comicbook/okularComicbook.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/comicbook/okularComicbook.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -3,6 +3,7 @@
+ Name=Okular
+ Name[ar]=اوكلار
+ Name[ca]=Okular
++Name[ca@valencia]=Okular
+ Name[cs]=Okular
+ Name[da]=Okular
+ Name[de]=Okular
+diff -Nur kdegraphics-4.3.4/okular/generators/djvu/libokularGenerator_djvu.desktop kdegraphics-4.3.5/okular/generators/djvu/libokularGenerator_djvu.desktop
+--- kdegraphics-4.3.4/okular/generators/djvu/libokularGenerator_djvu.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/djvu/libokularGenerator_djvu.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -4,6 +4,7 @@
+ Name[ar]=djvu
+ Name[bg]=djvu
+ Name[ca]=djvu
++Name[ca@valencia]=djvu
+ Name[cs]=djvu
+ Name[da]=djvu
+ Name[de]=djvu
+@@ -19,6 +20,7 @@
+ Name[gl]=djvu
+ Name[hi]=डीजेवीयू
+ Name[hne]=डीजेवीयू
++Name[hr]=djvu
+ Name[hu]=DjVu
+ Name[is]=djvu
+ Name[it]=djvu
+@@ -56,6 +58,7 @@
+ Comment=DjVu backend for Okular
+ Comment[ar]=المنتهى الخلفي DjVu لأوكلار
+ Comment[ca]=Dorsal de DjVu per a l'Okular
++Comment[ca@valencia]=Dorsal de DjVu per a l'Okular
+ Comment[da]=DjVu-motor til Okular
+ Comment[de]=Anzeigemodul für DjVu in Okular
+ Comment[el]=Σύστημα υποστήριξης DjVu για το Okular
+@@ -68,6 +71,7 @@
+ Comment[ga]=Inneall DjVu le haghaidh Okular
+ Comment[gl]=Infraestrutura de DjVu para Okular
+ Comment[hne]=ओकुलर बर डीजेवीयू बैकएन्ड
++Comment[hr]=Podrška za DjVu za Okular
+ Comment[hu]=DjVu-bővítmény az Okularhoz
+ Comment[is]=DjVu stuðningur fyrir Okular
+ Comment[it]=Backend DjVu per Okular
+@@ -94,7 +98,7 @@
+ Comment[sv]=DjVu-gränssnitt för Okular
+ Comment[th]=แบ็คเอนต์เอกสาร DjVu สำหรับ Okular
+ Comment[tr]=Okular için DjVu arka ucu
+-Comment[uk]=Втулка DjVu для Okular
++Comment[uk]=Додаток DjVu для Okular
+ Comment[wa]=Programe fondmint d' Okular po DjVu
+ Comment[x-test]=xxDjVu backend for Okularxx
+ Comment[zh_CN]=Okular 的 Djvu 格式后端
+diff -Nur kdegraphics-4.3.4/okular/generators/djvu/okularApplication_djvu.desktop kdegraphics-4.3.5/okular/generators/djvu/okularApplication_djvu.desktop
+--- kdegraphics-4.3.4/okular/generators/djvu/okularApplication_djvu.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/djvu/okularApplication_djvu.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -4,6 +4,7 @@
+ Name=Okular
+ Name[ar]=اوكلار
+ Name[ca]=Okular
++Name[ca@valencia]=Okular
+ Name[cs]=Okular
+ Name[da]=Okular
+ Name[de]=Okular
+@@ -53,6 +54,7 @@
+ GenericName[ar]=عارض المستندات
+ GenericName[bg]=Визуализатор
+ GenericName[ca]=Visualitzador de documents
++GenericName[ca@valencia]=Visualitzador de documents
+ GenericName[cs]=Prohlížeč dokumentů
+ GenericName[da]=Dokumentfremviser
+ GenericName[de]=Dokumentenbetrachter
+@@ -69,6 +71,7 @@
+ GenericName[gl]=Visor de documentos
+ GenericName[hi]=दस्तावेज़ प्रदर्शक
+ GenericName[hne]=कागद प्रदर्सक
++GenericName[hr]=Preglednik dokumenata
+ GenericName[hu]=Dokumentumnézegető
+ GenericName[is]=Skjalaskoðari
+ GenericName[it]=Visore di documenti
+diff -Nur kdegraphics-4.3.4/okular/generators/djvu/okularDjvu.desktop kdegraphics-4.3.5/okular/generators/djvu/okularDjvu.desktop
+--- kdegraphics-4.3.4/okular/generators/djvu/okularDjvu.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/djvu/okularDjvu.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -3,6 +3,7 @@
+ Name=Okular
+ Name[ar]=اوكلار
+ Name[ca]=Okular
++Name[ca@valencia]=Okular
+ Name[cs]=Okular
+ Name[da]=Okular
+ Name[de]=Okular
+diff -Nur kdegraphics-4.3.4/okular/generators/dvi/libokularGenerator_dvi.desktop kdegraphics-4.3.5/okular/generators/dvi/libokularGenerator_dvi.desktop
+--- kdegraphics-4.3.4/okular/generators/dvi/libokularGenerator_dvi.desktop	2009-11-27 14:03:13.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/dvi/libokularGenerator_dvi.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -4,6 +4,7 @@
+ Name[ar]=dvi
+ Name[bg]=dvi
+ Name[ca]=dvi
++Name[ca@valencia]=dvi
+ Name[cs]=dvi
+ Name[da]=dvi
+ Name[de]=dvi
+@@ -19,6 +20,7 @@
+ Name[gl]=dvi
+ Name[hi]=डीवीआई
+ Name[hne]=डीवीआई
++Name[hr]=dvi
+ Name[hu]=dvi
+ Name[is]=dvi
+ Name[it]=dvi
+@@ -56,6 +58,7 @@
+ Comment=DVI backend for Okular
+ Comment[ar]=المنتهى الخلفي DVI لأوكلار
+ Comment[ca]=Dorsal de DVI per a l'Okular
++Comment[ca@valencia]=Dorsal de DVI per a l'Okular
+ Comment[da]=DVI-motor til Okular
+ Comment[de]=Anzeigemodul für DVI in Okular
+ Comment[el]=Σύστημα υποστήριξης DVI για το Okular
+@@ -68,6 +71,7 @@
+ Comment[ga]=Inneall DVI le haghaidh Okular
+ Comment[gl]=Infraestrutura de DVI para Okular
+ Comment[hne]=ओकुलर बर डीवीआई बैकएन्ड
++Comment[hr]=Podrška za DVI za Okular
+ Comment[hu]=DVI-kezelő bővítmény az Okularhoz
+ Comment[is]=DVI stuðningur fyrir Okular
+ Comment[it]=Backend DVI per Okular
+@@ -94,7 +98,7 @@
+ Comment[sv]=DVI-gränssnitt för Okular
+ Comment[th]=แบ็คเอนต์เอกสาร DVI สำหรับ Okular
+ Comment[tr]=Okular için DVI arka ucu
+-Comment[uk]=Втулка DVI для Okular
++Comment[uk]=Додаток DVI для Okular
+ Comment[wa]=Programe fondmint d' Okular po les DVI
+ Comment[x-test]=xxDVI backend for Okularxx
+ Comment[zh_CN]=Okular 的 DVI 格式后端
+diff -Nur kdegraphics-4.3.4/okular/generators/dvi/okularApplication_dvi.desktop kdegraphics-4.3.5/okular/generators/dvi/okularApplication_dvi.desktop
+--- kdegraphics-4.3.4/okular/generators/dvi/okularApplication_dvi.desktop	2009-11-27 14:03:13.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/dvi/okularApplication_dvi.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -4,6 +4,7 @@
+ Name=Okular
+ Name[ar]=اوكلار
+ Name[ca]=Okular
++Name[ca@valencia]=Okular
+ Name[cs]=Okular
+ Name[da]=Okular
+ Name[de]=Okular
+@@ -53,6 +54,7 @@
+ GenericName[ar]=عارض المستندات
+ GenericName[bg]=Визуализатор
+ GenericName[ca]=Visualitzador de documents
++GenericName[ca@valencia]=Visualitzador de documents
+ GenericName[cs]=Prohlížeč dokumentů
+ GenericName[da]=Dokumentfremviser
+ GenericName[de]=Dokumentenbetrachter
+@@ -69,6 +71,7 @@
+ GenericName[gl]=Visor de documentos
+ GenericName[hi]=दस्तावेज़ प्रदर्शक
+ GenericName[hne]=कागद प्रदर्सक
++GenericName[hr]=Preglednik dokumenata
+ GenericName[hu]=Dokumentumnézegető
+ GenericName[is]=Skjalaskoðari
+ GenericName[it]=Visore di documenti
+diff -Nur kdegraphics-4.3.4/okular/generators/dvi/okularDvi.desktop kdegraphics-4.3.5/okular/generators/dvi/okularDvi.desktop
+--- kdegraphics-4.3.4/okular/generators/dvi/okularDvi.desktop	2009-11-27 14:03:13.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/dvi/okularDvi.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -3,6 +3,7 @@
+ Name=Okular
+ Name[ar]=اوكلار
+ Name[ca]=Okular
++Name[ca@valencia]=Okular
+ Name[cs]=Okular
+ Name[da]=Okular
+ Name[de]=Okular
+diff -Nur kdegraphics-4.3.4/okular/generators/epub/libokularGenerator_epub.desktop kdegraphics-4.3.5/okular/generators/epub/libokularGenerator_epub.desktop
+--- kdegraphics-4.3.4/okular/generators/epub/libokularGenerator_epub.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/epub/libokularGenerator_epub.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -3,6 +3,7 @@
+ Name=EPub document
+ Name[ar]=مستند إيباب
+ Name[ca]=Document EPub
++Name[ca@valencia]=Document EPub
+ Name[cs]=EPub dokument
+ Name[da]=EPub-dokument
+ Name[de]=EPub-Dokument
+@@ -16,6 +17,7 @@
+ Name[ga]=Cáipéis EPub
+ Name[gl]=Documento EPub
+ Name[hne]=ईपब कागद
++Name[hr]=Dokument oblika EPub
+ Name[hu]=EPub-dokumentum
+ Name[is]=EPub skjal
+ Name[it]=Documento EPub
+@@ -50,6 +52,7 @@
+ Comment=EPub backend for Okular
+ Comment[ar]=المنتهى الخلفي EPub لأوكلار
+ Comment[ca]=Dorsal d'EPub per a l'Okular
++Comment[ca@valencia]=Dorsal d'EPub per a l'Okular
+ Comment[da]=EPub-motor til Okular
+ Comment[de]=Anzeigemodul für EPub in Okular
+ Comment[el]=Σύστημα υποστήριξης EPub για το Okular
+@@ -61,6 +64,7 @@
+ Comment[ga]=Inneall EPub le haghaidh Okular
+ Comment[gl]=Infraestrutura de EPub para Okular
+ Comment[hne]=ओकुलर बर ईपब बैकएन्ड
++Comment[hr]=Podrška za EPub za Okular
+ Comment[hu]=EPub-kezelő bővítmény az Okularhoz
+ Comment[is]=EPub stuðningur fyrir Okular
+ Comment[it]=Backend EPub per Okular
+@@ -87,7 +91,7 @@
+ Comment[sv]=Epub-gränssnitt för Okular
+ Comment[th]=แบ็คเอนต์เอกสาร EPub สำหรับ Okular
+ Comment[tr]=Okular için EPub arka ucu
+-Comment[uk]=Втулка EPub для Okular
++Comment[uk]=Додаток EPub для Okular
+ Comment[wa]=Programe fondmint d' Okular po EPub
+ Comment[x-test]=xxEPub backend for Okularxx
+ Comment[zh_CN]=Okular 的 EPub 格式后端
+diff -Nur kdegraphics-4.3.4/okular/generators/epub/okularApplication_epub.desktop kdegraphics-4.3.5/okular/generators/epub/okularApplication_epub.desktop
+--- kdegraphics-4.3.4/okular/generators/epub/okularApplication_epub.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/epub/okularApplication_epub.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -4,6 +4,7 @@
+ Name=Okular
+ Name[ar]=اوكلار
+ Name[ca]=Okular
++Name[ca@valencia]=Okular
+ Name[cs]=Okular
+ Name[da]=Okular
+ Name[de]=Okular
+@@ -53,6 +54,7 @@
+ GenericName[ar]=عارض المستندات
+ GenericName[bg]=Визуализатор
+ GenericName[ca]=Visualitzador de documents
++GenericName[ca@valencia]=Visualitzador de documents
+ GenericName[cs]=Prohlížeč dokumentů
+ GenericName[da]=Dokumentfremviser
+ GenericName[de]=Dokumentenbetrachter
+@@ -69,6 +71,7 @@
+ GenericName[gl]=Visor de documentos
+ GenericName[hi]=दस्तावेज़ प्रदर्शक
+ GenericName[hne]=कागद प्रदर्सक
++GenericName[hr]=Preglednik dokumenata
+ GenericName[hu]=Dokumentumnézegető
+ GenericName[is]=Skjalaskoðari
+ GenericName[it]=Visore di documenti
+diff -Nur kdegraphics-4.3.4/okular/generators/epub/okularEPub.desktop kdegraphics-4.3.5/okular/generators/epub/okularEPub.desktop
+--- kdegraphics-4.3.4/okular/generators/epub/okularEPub.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/epub/okularEPub.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -3,6 +3,7 @@
+ Name=Okular
+ Name[ar]=اوكلار
+ Name[ca]=Okular
++Name[ca@valencia]=Okular
+ Name[cs]=Okular
+ Name[da]=Okular
+ Name[de]=Okular
+diff -Nur kdegraphics-4.3.4/okular/generators/fax/libokularGenerator_fax.desktop kdegraphics-4.3.5/okular/generators/fax/libokularGenerator_fax.desktop
+--- kdegraphics-4.3.4/okular/generators/fax/libokularGenerator_fax.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/fax/libokularGenerator_fax.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -3,6 +3,7 @@
+ Name=Fax documents
+ Name[ar]=مستندات الفاكس
+ Name[ca]=Documents de fax
++Name[ca@valencia]=Documents de fax
+ Name[cs]=Faxové dokumenty
+ Name[da]=Fax-dokumenter
+ Name[de]=Fax-Dokumente
+@@ -15,6 +16,7 @@
+ Name[ga]=Facsáil cáipéisí
+ Name[gl]=Documentos de fax
+ Name[hne]=फैक्स कागद
++Name[hr]=Dokumenti za faks
+ Name[hu]=Faxdokumentumok
+ Name[is]=Fax skjöl
+ Name[it]=Documenti Fax
+@@ -48,6 +50,7 @@
+ Comment=G3/G4 Fax backend for Okular
+ Comment[ar]=المنتهى الخلفي G3/G4 Fax لأوكلار
+ Comment[ca]=Dorsal de fax G3/G4 per a l'Okular
++Comment[ca@valencia]=Dorsal de fax G3/G4 per a l'Okular
+ Comment[da]=G3/G4 fax-motor til Okular
+ Comment[de]=Anzeigemodul für G3/G4 Faxe in Okular
+ Comment[el]=Σύστημα υποστήριξης φαξ G3/G4 για το Okular
+@@ -59,6 +62,7 @@
+ Comment[ga]=Inneall facsála G3/G4 le haghaidh Okular
+ Comment[gl]=Infraestrutura de fax G3/G4 para Okular
+ Comment[hne]=ओकुलर बर जी३/जी४ बैकएन्ड
++Comment[hr]=Podrška za G3/G4 za faks za Okular
+ Comment[hu]=Bővítmény G3/G4 formátumú faxok kezeléséhez az Okularhoz
+ Comment[is]=G3/G4 fax-bakendi fyrir Okular
+ Comment[it]=Backend G3/G4 per Okular
+@@ -84,7 +88,7 @@
+ Comment[sr@latin]=Pozadina G3/G4 faksova za Okular
+ Comment[sv]=G3/G4 telefax-gränssnitt för Okular
+ Comment[tr]=Okular için G3/G4 Faks arka ucu
+-Comment[uk]=Втулка факсів G3/G4 для Okular
++Comment[uk]=Додаток факсів G3/G4 для Okular
+ Comment[x-test]=xxG3/G4 Fax backend for Okularxx
+ Comment[zh_CN]=Okular 的 G3/G4 Fax 格式后端
+ Comment[zh_TW]=Okular G3/G4 傳真後端
+diff -Nur kdegraphics-4.3.4/okular/generators/fax/okularApplication_fax.desktop kdegraphics-4.3.5/okular/generators/fax/okularApplication_fax.desktop
+--- kdegraphics-4.3.4/okular/generators/fax/okularApplication_fax.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/fax/okularApplication_fax.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -4,6 +4,7 @@
+ Name=Okular
+ Name[ar]=اوكلار
+ Name[ca]=Okular
++Name[ca@valencia]=Okular
+ Name[cs]=Okular
+ Name[da]=Okular
+ Name[de]=Okular
+@@ -53,6 +54,7 @@
+ GenericName[ar]=عارض المستندات
+ GenericName[bg]=Визуализатор
+ GenericName[ca]=Visualitzador de documents
++GenericName[ca@valencia]=Visualitzador de documents
+ GenericName[cs]=Prohlížeč dokumentů
+ GenericName[da]=Dokumentfremviser
+ GenericName[de]=Dokumentenbetrachter
+@@ -69,6 +71,7 @@
+ GenericName[gl]=Visor de documentos
+ GenericName[hi]=दस्तावेज़ प्रदर्शक
+ GenericName[hne]=कागद प्रदर्सक
++GenericName[hr]=Preglednik dokumenata
+ GenericName[hu]=Dokumentumnézegető
+ GenericName[is]=Skjalaskoðari
+ GenericName[it]=Visore di documenti
+diff -Nur kdegraphics-4.3.4/okular/generators/fax/okularFax.desktop kdegraphics-4.3.5/okular/generators/fax/okularFax.desktop
+--- kdegraphics-4.3.4/okular/generators/fax/okularFax.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/fax/okularFax.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -3,6 +3,7 @@
+ Name=Okular
+ Name[ar]=اوكلار
+ Name[ca]=Okular
++Name[ca@valencia]=Okular
+ Name[cs]=Okular
+ Name[da]=Okular
+ Name[de]=Okular
+diff -Nur kdegraphics-4.3.4/okular/generators/fictionbook/libokularGenerator_fb.desktop kdegraphics-4.3.5/okular/generators/fictionbook/libokularGenerator_fb.desktop
+--- kdegraphics-4.3.4/okular/generators/fictionbook/libokularGenerator_fb.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/fictionbook/libokularGenerator_fb.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -4,6 +4,7 @@
+ Name[ar]=مستند فيكشن بوك
+ Name[bg]=FictionBook документ
+ Name[ca]=Document FictionBook
++Name[ca@valencia]=Document FictionBook
+ Name[da]=FictionBook-dokument
+ Name[de]=Fictionbook-Dokument
+ Name[el]=Έγγραφο FictionBook
+@@ -18,6 +19,7 @@
+ Name[gl]=Documento FictionBook
+ Name[hi]=फ़िक्शनबुक दस्तावेज़
+ Name[hne]=फिक्सनबुक कागद
++Name[hr]=Dokument oblika FictionBook
+ Name[hu]=FictionBook-dokumentum
+ Name[is]=FictionBook skjal
+ Name[it]=Documento FictionBook
+@@ -52,6 +54,7 @@
+ Comment=FictionBook backend for Okular
+ Comment[ar]=المنتهى الخلفي FictionBook لأوكلار
+ Comment[ca]=Dorsal de FictionBook per a l'Okular
++Comment[ca@valencia]=Dorsal de FictionBook per a l'Okular
+ Comment[da]=FictionBook-motor til Okular
+ Comment[de]=Anzeigemodul für Fictionbook in Okular
+ Comment[el]=Σύστημα υποστήριξης FictionBook για το Okular
+@@ -64,6 +67,7 @@
+ Comment[ga]=Inneall FictionBook le haghaidh Okular
+ Comment[gl]=Infraestrutura FictionBook para Okular
+ Comment[hne]=ओकुलर बर फिक्सनबुक बैकएन्ड
++Comment[hr]=Podrška za FictionBook za Okular
+ Comment[hu]=FictionBook-kezelő bővítmény az Okularhoz
+ Comment[is]=FictionBook stuðningur fyrir Okular
+ Comment[it]=Backend FictionBook per Okular
+@@ -89,7 +93,7 @@
+ Comment[sv]=FictionBook-gränssnitt för Okular
+ Comment[th]=แบ็คเอนต์เอกสาร FictionBook สำหรับ Okular
+ Comment[tr]=Okular için FictionBook arka ucu
+-Comment[uk]=Втулка FictionBook для Okular
++Comment[uk]=Додаток FictionBook для Okular
+ Comment[x-test]=xxFictionBook backend for Okularxx
+ Comment[zh_CN]=Okular 的 FictionBook 格式后端
+ Comment[zh_TW]=Okular FictionBook 後端
+diff -Nur kdegraphics-4.3.4/okular/generators/fictionbook/okularApplication_fb.desktop kdegraphics-4.3.5/okular/generators/fictionbook/okularApplication_fb.desktop
+--- kdegraphics-4.3.4/okular/generators/fictionbook/okularApplication_fb.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/fictionbook/okularApplication_fb.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -4,6 +4,7 @@
+ Name=Okular
+ Name[ar]=اوكلار
+ Name[ca]=Okular
++Name[ca@valencia]=Okular
+ Name[cs]=Okular
+ Name[da]=Okular
+ Name[de]=Okular
+@@ -53,6 +54,7 @@
+ GenericName[ar]=عارض المستندات
+ GenericName[bg]=Визуализатор
+ GenericName[ca]=Visualitzador de documents
++GenericName[ca@valencia]=Visualitzador de documents
+ GenericName[cs]=Prohlížeč dokumentů
+ GenericName[da]=Dokumentfremviser
+ GenericName[de]=Dokumentenbetrachter
+@@ -69,6 +71,7 @@
+ GenericName[gl]=Visor de documentos
+ GenericName[hi]=दस्तावेज़ प्रदर्शक
+ GenericName[hne]=कागद प्रदर्सक
++GenericName[hr]=Preglednik dokumenata
+ GenericName[hu]=Dokumentumnézegető
+ GenericName[is]=Skjalaskoðari
+ GenericName[it]=Visore di documenti
+diff -Nur kdegraphics-4.3.4/okular/generators/fictionbook/okularFb.desktop kdegraphics-4.3.5/okular/generators/fictionbook/okularFb.desktop
+--- kdegraphics-4.3.4/okular/generators/fictionbook/okularFb.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/fictionbook/okularFb.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -3,6 +3,7 @@
+ Name=Okular
+ Name[ar]=اوكلار
+ Name[ca]=Okular
++Name[ca@valencia]=Okular
+ Name[cs]=Okular
+ Name[da]=Okular
+ Name[de]=Okular
+diff -Nur kdegraphics-4.3.4/okular/generators/kimgio/libokularGenerator_kimgio.desktop kdegraphics-4.3.5/okular/generators/kimgio/libokularGenerator_kimgio.desktop
+--- kdegraphics-4.3.4/okular/generators/kimgio/libokularGenerator_kimgio.desktop	2009-11-27 14:03:13.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/kimgio/libokularGenerator_kimgio.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -4,6 +4,7 @@
+ Name[ar]=مكتبات الصورة لكدي
+ Name[bg]=Библиотеки с галерии
+ Name[ca]=Biblioteques d'imatges del KDE
++Name[ca@valencia]=Biblioteques d'imatges del KDE
+ Name[cs]=Knihovny obrázků KDE
+ Name[da]=KDE's billedbiblioteker
+ Name[de]=KDE-Bilder-Bibliotheken
+@@ -20,6 +21,7 @@
+ Name[gl]=Bibliotecas de KDE para imaxes
+ Name[hi]=केडीई छवि लाइब्रेरीज
+ Name[hne]=केडीई फोटू लाइब्रेरीज
++Name[hr]=Biblioteka u KDE-u za slike
+ Name[hu]=KDE képbeolvasó programkönyvtárak
+ Name[is]=Myndmeðhöndlunarforrit KDE
+ Name[it]=Librerie KDE per la visione di immagini
+@@ -56,6 +58,7 @@
+ Comment=Image backend for Okular
+ Comment[ar]=المنتهى الخلفي للصورة لأوكلار
+ Comment[ca]=Dorsal d'imatges per a l'Okular
++Comment[ca@valencia]=Dorsal d'imatges per a l'Okular
+ Comment[da]=Billedmotor til Okular
+ Comment[de]=Anzeigemodul für Bilder in Okular
+ Comment[el]=Σύστημα υποστήριξης εικόνων για το Okular
+@@ -68,6 +71,7 @@
+ Comment[ga]=Inneall íomhánna le haghaidh Okular
+ Comment[gl]=Infraestrutura de imaxes para Okular
+ Comment[hne]=ओकुलर बर फोटू बैकएन्ड
++Comment[hr]=Podrška za slike za Okular
+ Comment[hu]=Képkezelő bővítmény az Okularhoz
+ Comment[is]=Myndmeðhöndlunarstuðningur fyrir Okular
+ Comment[it]=Backend immagini per Okular
+@@ -94,7 +98,7 @@
+ Comment[sv]=Bildgränssnitt för Okular
+ Comment[th]=แบ็คเอนต์จัดการภาพสำหรับ Okular
+ Comment[tr]=Okular için resim arka ucu
+-Comment[uk]=Втулка зображень для Okular
++Comment[uk]=Додаток зображень для Okular
+ Comment[x-test]=xxImage backend for Okularxx
+ Comment[zh_CN]=Okular 的图像格式后端
+ Comment[zh_TW]=Okular 影像後端
+diff -Nur kdegraphics-4.3.4/okular/generators/kimgio/okularApplication_kimgio.desktop kdegraphics-4.3.5/okular/generators/kimgio/okularApplication_kimgio.desktop
+--- kdegraphics-4.3.4/okular/generators/kimgio/okularApplication_kimgio.desktop	2009-11-27 14:03:13.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/kimgio/okularApplication_kimgio.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -4,6 +4,7 @@
+ Name=Okular
+ Name[ar]=اوكلار
+ Name[ca]=Okular
++Name[ca@valencia]=Okular
+ Name[cs]=Okular
+ Name[da]=Okular
+ Name[de]=Okular
+@@ -53,6 +54,7 @@
+ GenericName[ar]=عارض المستندات
+ GenericName[bg]=Визуализатор
+ GenericName[ca]=Visualitzador de documents
++GenericName[ca@valencia]=Visualitzador de documents
+ GenericName[cs]=Prohlížeč dokumentů
+ GenericName[da]=Dokumentfremviser
+ GenericName[de]=Dokumentenbetrachter
+@@ -69,6 +71,7 @@
+ GenericName[gl]=Visor de documentos
+ GenericName[hi]=दस्तावेज़ प्रदर्शक
+ GenericName[hne]=कागद प्रदर्सक
++GenericName[hr]=Preglednik dokumenata
+ GenericName[hu]=Dokumentumnézegető
+ GenericName[is]=Skjalaskoðari
+ GenericName[it]=Visore di documenti
+diff -Nur kdegraphics-4.3.4/okular/generators/kimgio/okularKimgio.desktop kdegraphics-4.3.5/okular/generators/kimgio/okularKimgio.desktop
+--- kdegraphics-4.3.4/okular/generators/kimgio/okularKimgio.desktop	2009-11-27 14:03:13.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/kimgio/okularKimgio.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -3,6 +3,7 @@
+ Name=Okular
+ Name[ar]=اوكلار
+ Name[ca]=Okular
++Name[ca@valencia]=Okular
+ Name[cs]=Okular
+ Name[da]=Okular
+ Name[de]=Okular
+diff -Nur kdegraphics-4.3.4/okular/generators/mobipocket/libokularGenerator_mobi.desktop kdegraphics-4.3.5/okular/generators/mobipocket/libokularGenerator_mobi.desktop
+--- kdegraphics-4.3.4/okular/generators/mobipocket/libokularGenerator_mobi.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/mobipocket/libokularGenerator_mobi.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -3,6 +3,7 @@
+ Name=Mobipocket document
+ Name[ar]=مستند Mobipocket
+ Name[ca]=Document Mobipocket
++Name[ca@valencia]=Document Mobipocket
+ Name[cs]=Mobipocket dokument
+ Name[da]=Mobipocket-dokument
+ Name[de]=Mobipocket-Dokument
+@@ -14,6 +15,7 @@
+ Name[fr]=Document Mobipocket
+ Name[ga]=Cáipéis Mobipocket
+ Name[gl]=Documento Mobipocket
++Name[hr]=Dokument oblika Mobipocket
+ Name[hu]=Mobipocket-dokumentum
+ Name[is]=Mobipocket skjal
+ Name[it]=Documento Mobipocket
+@@ -44,6 +46,7 @@
+ Comment=Mobipocket backend for Okular
+ Comment[ar]=خلفية Mobipocket لأوكلار
+ Comment[ca]=Dorsal de Mobipocket per a l'Okular
++Comment[ca@valencia]=Dorsal de Mobipocket per a l'Okular
+ Comment[da]=Mobipocket-motor til Okular
+ Comment[de]=Ein Anzeigemodul für Mobipocket-Dateien in Okular
+ Comment[el]=Σύστημα υποστήριξης Mobipocket για το Okular
+@@ -54,6 +57,7 @@
+ Comment[fr]=Interface d'Okular pour le format Mobipocket
+ Comment[ga]=Inneall Mobipocket le haghaidh Okular
+ Comment[gl]=Infraestrutura de Mobipocket para Okular
++Comment[hr]=Podrška za Mobipocket za Okular
+ Comment[hu]=Mobipocket-bővítmény az Okularhoz
+ Comment[is]=Mobipocket stuðningur fyrir Okular
+ Comment[it]=Backend Mobipocket per Okular
+diff -Nur kdegraphics-4.3.4/okular/generators/mobipocket/okularApplication_mobi.desktop kdegraphics-4.3.5/okular/generators/mobipocket/okularApplication_mobi.desktop
+--- kdegraphics-4.3.4/okular/generators/mobipocket/okularApplication_mobi.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/mobipocket/okularApplication_mobi.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -4,6 +4,7 @@
+ Name=Okular
+ Name[ar]=اوكلار
+ Name[ca]=Okular
++Name[ca@valencia]=Okular
+ Name[cs]=Okular
+ Name[da]=Okular
+ Name[de]=Okular
+@@ -53,6 +54,7 @@
+ GenericName[ar]=عارض المستندات
+ GenericName[bg]=Визуализатор
+ GenericName[ca]=Visualitzador de documents
++GenericName[ca@valencia]=Visualitzador de documents
+ GenericName[cs]=Prohlížeč dokumentů
+ GenericName[da]=Dokumentfremviser
+ GenericName[de]=Dokumentenbetrachter
+@@ -69,6 +71,7 @@
+ GenericName[gl]=Visor de documentos
+ GenericName[hi]=दस्तावेज़ प्रदर्शक
+ GenericName[hne]=कागद प्रदर्सक
++GenericName[hr]=Preglednik dokumenata
+ GenericName[hu]=Dokumentumnézegető
+ GenericName[is]=Skjalaskoðari
+ GenericName[it]=Visore di documenti
+diff -Nur kdegraphics-4.3.4/okular/generators/mobipocket/okularMobi.desktop kdegraphics-4.3.5/okular/generators/mobipocket/okularMobi.desktop
+--- kdegraphics-4.3.4/okular/generators/mobipocket/okularMobi.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/mobipocket/okularMobi.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -3,6 +3,7 @@
+ Name=Okular
+ Name[ar]=اوكلار
+ Name[ca]=Okular
++Name[ca@valencia]=Okular
+ Name[cs]=Okular
+ Name[da]=Okular
+ Name[de]=Okular
+diff -Nur kdegraphics-4.3.4/okular/generators/ooo/libokularGenerator_ooo.desktop kdegraphics-4.3.5/okular/generators/ooo/libokularGenerator_ooo.desktop
+--- kdegraphics-4.3.4/okular/generators/ooo/libokularGenerator_ooo.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/ooo/libokularGenerator_ooo.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -4,6 +4,7 @@
+ Name[ar]=نسق OpenDocument
+ Name[bg]=Формат OpenDocument
+ Name[ca]=Format OpenDocument
++Name[ca@valencia]=Format OpenDocument
+ Name[cs]=OpenDocument formát
+ Name[da]=OpenDocument-format
+ Name[de]=OpenDocument-Format
+@@ -19,6 +20,7 @@
+ Name[gl]=Formato OpenDocument
+ Name[hi]=ओपनडाक्यूमेंट फ़ॉर्मेट
+ Name[hne]=ओपनडाक्यूमेंट फारमेट
++Name[hr]=Oblik OpenDocument
+ Name[hu]=OpenDocument-beolvasó
+ Name[is]=OpenDocument snið
+ Name[it]=Formato OpenDocument
+@@ -55,6 +57,7 @@
+ Comment=OpenDocument backend for Okular
+ Comment[ar]=المنتهى الخلفي OpenDocument لأوكلار
+ Comment[ca]=Dorsal d'OpenDocument per a l'Okular
++Comment[ca@valencia]=Dorsal d'OpenDocument per a l'Okular
+ Comment[da]=OpenDocument-motor til Okular
+ Comment[de]=Anzeigemodul für OpenDocument in Okular
+ Comment[el]=Σύστημα υποστήριξης OpenDocument για το Okular
+@@ -67,6 +70,7 @@
+ Comment[ga]=Inneall OpenDocument le haghaidh Okular
+ Comment[gl]=Infraestrutura de OpenDocument para Okular
+ Comment[hne]=ओकुलर बर ओपनडाक्यूमेंट बैकएन्ड
++Comment[hr]=Podrška za OpenDocument za Okular
+ Comment[hu]=OpenDocument-bővítmény az Okularhoz
+ Comment[is]=OpenDocument stuðningur fyrir Okular
+ Comment[it]=Backend OpenDocument per Okular
+@@ -93,7 +97,7 @@
+ Comment[sv]=OpenDocument-gränssnitt för Okular
+ Comment[th]=แบ็คเอนต์แฟ้มแบบ OpenDocument สำหรับ Okular
+ Comment[tr]=Okular için OpenDocument arka ucu
+-Comment[uk]=Втулка OpenDocument для Okular
++Comment[uk]=Додаток OpenDocument для Okular
+ Comment[x-test]=xxOpenDocument backend for Okularxx
+ Comment[zh_CN]=Okular 的开放文档格式后端
+ Comment[zh_TW]=Okular 的 OpenDocument 後端
+diff -Nur kdegraphics-4.3.4/okular/generators/ooo/okularApplication_ooo.desktop kdegraphics-4.3.5/okular/generators/ooo/okularApplication_ooo.desktop
+--- kdegraphics-4.3.4/okular/generators/ooo/okularApplication_ooo.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/ooo/okularApplication_ooo.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -4,6 +4,7 @@
+ Name=Okular
+ Name[ar]=اوكلار
+ Name[ca]=Okular
++Name[ca@valencia]=Okular
+ Name[cs]=Okular
+ Name[da]=Okular
+ Name[de]=Okular
+@@ -53,6 +54,7 @@
+ GenericName[ar]=عارض المستندات
+ GenericName[bg]=Визуализатор
+ GenericName[ca]=Visualitzador de documents
++GenericName[ca@valencia]=Visualitzador de documents
+ GenericName[cs]=Prohlížeč dokumentů
+ GenericName[da]=Dokumentfremviser
+ GenericName[de]=Dokumentenbetrachter
+@@ -69,6 +71,7 @@
+ GenericName[gl]=Visor de documentos
+ GenericName[hi]=दस्तावेज़ प्रदर्शक
+ GenericName[hne]=कागद प्रदर्सक
++GenericName[hr]=Preglednik dokumenata
+ GenericName[hu]=Dokumentumnézegető
+ GenericName[is]=Skjalaskoðari
+ GenericName[it]=Visore di documenti
+diff -Nur kdegraphics-4.3.4/okular/generators/ooo/okularOoo.desktop kdegraphics-4.3.5/okular/generators/ooo/okularOoo.desktop
+--- kdegraphics-4.3.4/okular/generators/ooo/okularOoo.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/ooo/okularOoo.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -3,6 +3,7 @@
+ Name=Okular
+ Name[ar]=اوكلار
+ Name[ca]=Okular
++Name[ca@valencia]=Okular
+ Name[cs]=Okular
+ Name[da]=Okular
+ Name[de]=Okular
+diff -Nur kdegraphics-4.3.4/okular/generators/plucker/libokularGenerator_plucker.desktop kdegraphics-4.3.5/okular/generators/plucker/libokularGenerator_plucker.desktop
+--- kdegraphics-4.3.4/okular/generators/plucker/libokularGenerator_plucker.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/plucker/libokularGenerator_plucker.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -4,6 +4,7 @@
+ Name[ar]=مستند Plucker
+ Name[bg]=Plucker документ
+ Name[ca]=Document Plucker
++Name[ca@valencia]=Document Plucker
+ Name[cs]=Plucker dokument
+ Name[da]=Plucker-dokument
+ Name[de]=Plucker-Dokument
+@@ -19,6 +20,7 @@
+ Name[gl]=Documento Plucker
+ Name[hi]=प्लकर दस्तावेज़
+ Name[hne]=प्लकर कागद
++Name[hr]=Dokument oblika Plucker
+ Name[hu]=Plucker-dokumentum
+ Name[is]=Plucker skjal
+ Name[it]=Documento Plucker
+@@ -54,6 +56,7 @@
+ Comment=Plucker backend for Okular
+ Comment[ar]=المنتهى الخلفي Plucker لأوكلار
+ Comment[ca]=Dorsal de Plucker per a l'Okular
++Comment[ca@valencia]=Dorsal de Plucker per a l'Okular
+ Comment[da]=Plucker-motor til Okular
+ Comment[de]=Anzeigemodul für Plucker in Okular
+ Comment[el]=Σύστημα υποστήριξης Plucker για το Okular
+@@ -66,6 +69,7 @@
+ Comment[ga]=Inneall Plucker le haghaidh Okular
+ Comment[gl]=Infraestrutura de Plucker para Okular
+ Comment[hne]=ओकुलर बर प्लकर बैकएन्ड
++Comment[hr]=Podrška za Plucker za Okular
+ Comment[hu]=Plucker-bővítmény az Okularhoz
+ Comment[is]=Plucker stuðningur fyrir Okular
+ Comment[it]=Backend Plucker per Okular
+@@ -92,7 +96,7 @@
+ Comment[sv]=Plucker-gränssnitt för Okular
+ Comment[th]=แบ็คเอนต์เอกสาร Plucker สำหรับ Okular
+ Comment[tr]=Okular için Plucker arka ucu
+-Comment[uk]=Втулка Plucker для Okular
++Comment[uk]=Додаток Plucker для Okular
+ Comment[x-test]=xxPlucker backend for Okularxx
+ Comment[zh_CN]=Okular 的 Plucker 格式后端
+ Comment[zh_TW]=Okular 的 Plucker 後端
+diff -Nur kdegraphics-4.3.4/okular/generators/plucker/okularApplication_plucker.desktop kdegraphics-4.3.5/okular/generators/plucker/okularApplication_plucker.desktop
+--- kdegraphics-4.3.4/okular/generators/plucker/okularApplication_plucker.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/plucker/okularApplication_plucker.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -4,6 +4,7 @@
+ Name=Okular
+ Name[ar]=اوكلار
+ Name[ca]=Okular
++Name[ca@valencia]=Okular
+ Name[cs]=Okular
+ Name[da]=Okular
+ Name[de]=Okular
+@@ -53,6 +54,7 @@
+ GenericName[ar]=عارض المستندات
+ GenericName[bg]=Визуализатор
+ GenericName[ca]=Visualitzador de documents
++GenericName[ca@valencia]=Visualitzador de documents
+ GenericName[cs]=Prohlížeč dokumentů
+ GenericName[da]=Dokumentfremviser
+ GenericName[de]=Dokumentenbetrachter
+@@ -69,6 +71,7 @@
+ GenericName[gl]=Visor de documentos
+ GenericName[hi]=दस्तावेज़ प्रदर्शक
+ GenericName[hne]=कागद प्रदर्सक
++GenericName[hr]=Preglednik dokumenata
+ GenericName[hu]=Dokumentumnézegető
+ GenericName[is]=Skjalaskoðari
+ GenericName[it]=Visore di documenti
+diff -Nur kdegraphics-4.3.4/okular/generators/plucker/okularPlucker.desktop kdegraphics-4.3.5/okular/generators/plucker/okularPlucker.desktop
+--- kdegraphics-4.3.4/okular/generators/plucker/okularPlucker.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/plucker/okularPlucker.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -3,6 +3,7 @@
+ Name=Okular
+ Name[ar]=اوكلار
+ Name[ca]=Okular
++Name[ca@valencia]=Okular
+ Name[cs]=Okular
+ Name[da]=Okular
+ Name[de]=Okular
+diff -Nur kdegraphics-4.3.4/okular/generators/poppler/libokularGenerator_poppler.desktop kdegraphics-4.3.5/okular/generators/poppler/libokularGenerator_poppler.desktop
+--- kdegraphics-4.3.4/okular/generators/poppler/libokularGenerator_poppler.desktop	2009-11-27 14:03:13.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/poppler/libokularGenerator_poppler.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -4,6 +4,7 @@
+ Name[ar]=بوبلِر
+ Name[bg]=Poppler
+ Name[ca]=Poppler
++Name[ca@valencia]=Poppler
+ Name[cs]=Poppler
+ Name[da]=Poppler
+ Name[de]=Poppler
+@@ -19,6 +20,7 @@
+ Name[gl]=Poppler
+ Name[hi]=पॉपलर
+ Name[hne]=पापलर
++Name[hr]=Poppler
+ Name[hu]=Poppler-beolvasó
+ Name[is]=Poppler
+ Name[it]=Poppler
+@@ -55,6 +57,7 @@
+ Comment=PDF backend for Okular using poppler
+ Comment[ar]=المنتهى الخلفي PDF لأوكلار
+ Comment[ca]=Dorsal de PDF per a l'Okular emprant el poppler
++Comment[ca@valencia]=Dorsal de PDF per a l'Okular emprant el poppler
+ Comment[da]=PDF-motor til Okular som bruger poppler
+ Comment[de]=Anzeigemodul für PDF (mittels Poppler) in Okular
+ Comment[el]=Σύστημα υποστήριξης PDF για το Okular με χρήση του poppler
+@@ -67,6 +70,7 @@
+ Comment[ga]=Inneall PDF a úsáideann poppler le haghaidh Okular
+ Comment[gl]=Infraestrutura de PDF mediante poppler para Okular
+ Comment[hne]=ओकुलर बर पापलर के परयोग करत पीडीएफ बैकएन्ड
++Comment[hr]=Podrška za PDF kroz poppler za Okular
+ Comment[hu]=Poppler-alapú PDF-kezelő bővítmény az Okularhoz
+ Comment[is]=PDF stuðningur fyrir Okular í gegnum Poppler
+ Comment[it]=Backend PDF per Okular che utilizza poppler
+@@ -78,7 +82,7 @@
+ Comment[lv]=PDF Okular aizmugure, lietojot poppler
+ Comment[nb]=PDF-motor (som bruker poppler) for Okular
+ Comment[nds]=PDF-Hülpprogramm för Okular, bruukt Poppler
+-Comment[nl]=PDF-backend voor Okular, gebruik makend van Poppler
++Comment[nl]=PDF-backend voor Okular, gebruikmakend van Poppler
+ Comment[nn]=PDF-motor (som brukar poppler) for Okular
+ Comment[pa]=ਓਕੁਲਾਰ ਲਈ ਪੋਪਲਰ ਦੀ ਵਰਤੋਂ ਕਰਕੇ PDF ਬੈਕਐਂਡ
+ Comment[pl]=Obsługa PDF dla Okulara przy użyciu poppler
+@@ -93,7 +97,7 @@
+ Comment[sv]=PDF-gränssnitt för Okular som använder Poppler
+ Comment[th]=แบ็คเอนต์ Poppler สำหรับ Okular
+ Comment[tr]=Okular için poppler kullanan PDF arka ucu
+-Comment[uk]=Втулка PDF для Okular з використанням poppler
++Comment[uk]=Додаток PDF для Okular з використанням poppler
+ Comment[x-test]=xxPDF backend for Okular using popplerxx
+ Comment[zh_CN]=使用 poppler 的 Okular PDF 格式后端
+ Comment[zh_TW]=Okular 使用 poppler 的 PDF 後端
+diff -Nur kdegraphics-4.3.4/okular/generators/poppler/okularApplication_pdf.desktop kdegraphics-4.3.5/okular/generators/poppler/okularApplication_pdf.desktop
+--- kdegraphics-4.3.4/okular/generators/poppler/okularApplication_pdf.desktop	2009-11-27 14:03:13.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/poppler/okularApplication_pdf.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -4,6 +4,7 @@
+ Name=Okular
+ Name[ar]=اوكلار
+ Name[ca]=Okular
++Name[ca@valencia]=Okular
+ Name[cs]=Okular
+ Name[da]=Okular
+ Name[de]=Okular
+@@ -53,6 +54,7 @@
+ GenericName[ar]=عارض المستندات
+ GenericName[bg]=Визуализатор
+ GenericName[ca]=Visualitzador de documents
++GenericName[ca@valencia]=Visualitzador de documents
+ GenericName[cs]=Prohlížeč dokumentů
+ GenericName[da]=Dokumentfremviser
+ GenericName[de]=Dokumentenbetrachter
+@@ -69,6 +71,7 @@
+ GenericName[gl]=Visor de documentos
+ GenericName[hi]=दस्तावेज़ प्रदर्शक
+ GenericName[hne]=कागद प्रदर्सक
++GenericName[hr]=Preglednik dokumenata
+ GenericName[hu]=Dokumentumnézegető
+ GenericName[is]=Skjalaskoðari
+ GenericName[it]=Visore di documenti
+diff -Nur kdegraphics-4.3.4/okular/generators/poppler/okularPoppler.desktop kdegraphics-4.3.5/okular/generators/poppler/okularPoppler.desktop
+--- kdegraphics-4.3.4/okular/generators/poppler/okularPoppler.desktop	2009-11-27 14:03:13.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/poppler/okularPoppler.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -3,6 +3,7 @@
+ Name=Okular
+ Name[ar]=اوكلار
+ Name[ca]=Okular
++Name[ca@valencia]=Okular
+ Name[cs]=Okular
+ Name[da]=Okular
+ Name[de]=Okular
+diff -Nur kdegraphics-4.3.4/okular/generators/spectre/libokularGenerator_ghostview.desktop kdegraphics-4.3.5/okular/generators/spectre/libokularGenerator_ghostview.desktop
+--- kdegraphics-4.3.4/okular/generators/spectre/libokularGenerator_ghostview.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/spectre/libokularGenerator_ghostview.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -4,6 +4,7 @@
+ Name[ar]=غوست سكريبت
+ Name[bg]=Ghostscript
+ Name[ca]=Ghostscript
++Name[ca@valencia]=Ghostscript
+ Name[cs]=Ghostscript
+ Name[da]=Ghostscript
+ Name[de]=Ghostscript
+@@ -19,6 +20,7 @@
+ Name[gl]=Ghostscript
+ Name[hi]=घोस्ट-स्क्रिप्ट
+ Name[hne]=घोस्ट-स्क्रिप्ट
++Name[hr]=Ghostscript
+ Name[hu]=Ghostscript
+ Name[is]=Ghostscript
+ Name[it]=Ghostscript
+@@ -56,6 +58,7 @@
+ Comment=Ghostscript PS/PDF backend for Okular
+ Comment[ar]=المنتهى الخلفي Ghostscript PS/PDF لأوكلار
+ Comment[ca]=Dorsal de Ghostscript PS/PDF per a l'Okular
++Comment[ca@valencia]=Dorsal de Ghostscript PS/PDF per a l'Okular
+ Comment[da]=Ghostscript PS/PDF-motor til Okular
+ Comment[de]=Anzeigemodul für Ghostscript PS/PDF in Okular
+ Comment[el]=Σύστημα υποστήριξης Ghostscript PS/PDF για το Okular
+@@ -68,6 +71,7 @@
+ Comment[ga]=Inneall PS/PDF Ghostscript le haghaidh Okular
+ Comment[gl]=Infraestrutura Ghostscript PS/PDF para Okular
+ Comment[hne]=ओकुलर बर घोस्टस्क्रिप्ट पीएस/पीडीएफ बैकएन्ड
++Comment[hr]=Podrška za Ghostscript-PS/PDF za Okular
+ Comment[hu]=Ghostscript PS/PDF-bővítmény az Okularhoz
+ Comment[is]=Ghostscript PS/PDF stuðningur fyrir Okular
+ Comment[it]=Backend Ghostscript PS/PDF per Okular
+@@ -94,7 +98,7 @@
+ Comment[sv]=Ghostscript PS/PDF-gränssnitt för Okular
+ Comment[th]=แบ็คเอนต์เอกสาร Ghostscript PS/PDF สำหรับ Okular
+ Comment[tr]=Okular için Ghostscript PS/PDF arka ucu
+-Comment[uk]=Втулка Ghostscript PS/PDF для Okular
++Comment[uk]=Додаток Ghostscript PS/PDF для Okular
+ Comment[x-test]=xxGhostscript PS/PDF backend for Okularxx
+ Comment[zh_CN]=Okular 的 Ghostscript PS/PDF 格式后端
+ Comment[zh_TW]=Okular 的 Ghostscript PS/PDF 後端
+diff -Nur kdegraphics-4.3.4/okular/generators/spectre/okularApplication_ghostview.desktop kdegraphics-4.3.5/okular/generators/spectre/okularApplication_ghostview.desktop
+--- kdegraphics-4.3.4/okular/generators/spectre/okularApplication_ghostview.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/spectre/okularApplication_ghostview.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -4,6 +4,7 @@
+ Name=Okular
+ Name[ar]=اوكلار
+ Name[ca]=Okular
++Name[ca@valencia]=Okular
+ Name[cs]=Okular
+ Name[da]=Okular
+ Name[de]=Okular
+@@ -53,6 +54,7 @@
+ GenericName[ar]=عارض المستندات
+ GenericName[bg]=Визуализатор
+ GenericName[ca]=Visualitzador de documents
++GenericName[ca@valencia]=Visualitzador de documents
+ GenericName[cs]=Prohlížeč dokumentů
+ GenericName[da]=Dokumentfremviser
+ GenericName[de]=Dokumentenbetrachter
+@@ -69,6 +71,7 @@
+ GenericName[gl]=Visor de documentos
+ GenericName[hi]=दस्तावेज़ प्रदर्शक
+ GenericName[hne]=कागद प्रदर्सक
++GenericName[hr]=Preglednik dokumenata
+ GenericName[hu]=Dokumentumnézegető
+ GenericName[is]=Skjalaskoðari
+ GenericName[it]=Visore di documenti
+diff -Nur kdegraphics-4.3.4/okular/generators/spectre/okularGhostview.desktop kdegraphics-4.3.5/okular/generators/spectre/okularGhostview.desktop
+--- kdegraphics-4.3.4/okular/generators/spectre/okularGhostview.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/spectre/okularGhostview.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -3,6 +3,7 @@
+ Name=Okular
+ Name[ar]=اوكلار
+ Name[ca]=Okular
++Name[ca@valencia]=Okular
+ Name[cs]=Okular
+ Name[da]=Okular
+ Name[de]=Okular
+diff -Nur kdegraphics-4.3.4/okular/generators/tiff/libokularGenerator_tiff.desktop kdegraphics-4.3.5/okular/generators/tiff/libokularGenerator_tiff.desktop
+--- kdegraphics-4.3.4/okular/generators/tiff/libokularGenerator_tiff.desktop	2009-11-27 14:03:13.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/tiff/libokularGenerator_tiff.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -3,6 +3,7 @@
+ Name=Okular TIFF Library
+ Name[ar]=مكتبة TIFF لأوكلار
+ Name[ca]=Biblioteca TIFF de l'Okular
++Name[ca@valencia]=Biblioteca TIFF de l'Okular
+ Name[cs]=Knihovna TIFF pro Okular
+ Name[da]=TIFF-bibliotek til Okular
+ Name[de]=TIFF-Bibliothek für Okular
+@@ -16,7 +17,7 @@
+ Name[ga]=Leabharlann TIFF Okular
+ Name[gl]=Biblioteca TIFF de Okular
+ Name[hne]=ओकुलर टिफ लाइब्रेरी
+-Name[hr]=TIFF biblioteka za Okular
++Name[hr]=Biblioteka u Okularu za TIFF
+ Name[hu]=Okular TIFF-kezelő programkönyvtár
+ Name[is]=Okular TIFF skráasafn
+ Name[it]=Libreria TIFF di Okular
+@@ -50,6 +51,7 @@
+ Comment=TIFF backend for Okular
+ Comment[ar]=المنتهى الخلفي TIFF لأوكلار
+ Comment[ca]=Dorsal de TIFF per a l'Okular
++Comment[ca@valencia]=Dorsal de TIFF per a l'Okular
+ Comment[da]=TIFF-motor til Okular
+ Comment[de]=Anzeigemodul für TIFF in Okular
+ Comment[el]=Σύστημα υποστήριξης TIFF για το Okular
+@@ -62,6 +64,7 @@
+ Comment[ga]=Inneall TIFF le haghaidh Okular
+ Comment[gl]=Infraestrutura de TIFF para Okular
+ Comment[hne]=ओकुलर बर टिफ बैकएन्ड
++Comment[hr]=Podrška za TIFF za Okular
+ Comment[hu]=TIFF-bővítmény az Okularhoz
+ Comment[is]=TIFF stuðningur fyrir Okular
+ Comment[it]=Backend TIFF per Okular
+@@ -88,7 +91,7 @@
+ Comment[sv]=TIFF-gränssnitt för Okular
+ Comment[th]=แบ็คเอนต์จัดการแฟ้ม TIFF สำหรับ Okular
+ Comment[tr]=Okular için TIFF arka ucu
+-Comment[uk]=Втулка TIFF для Okular
++Comment[uk]=Додаток TIFF для Okular
+ Comment[x-test]=xxTIFF backend for Okularxx
+ Comment[zh_CN]=Okular 的 TIFF 格式后端
+ Comment[zh_TW]=Okular TIFF 後端
+diff -Nur kdegraphics-4.3.4/okular/generators/tiff/okularApplication_tiff.desktop kdegraphics-4.3.5/okular/generators/tiff/okularApplication_tiff.desktop
+--- kdegraphics-4.3.4/okular/generators/tiff/okularApplication_tiff.desktop	2009-11-27 14:03:13.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/tiff/okularApplication_tiff.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -4,6 +4,7 @@
+ Name=Okular
+ Name[ar]=اوكلار
+ Name[ca]=Okular
++Name[ca@valencia]=Okular
+ Name[cs]=Okular
+ Name[da]=Okular
+ Name[de]=Okular
+@@ -53,6 +54,7 @@
+ GenericName[ar]=عارض المستندات
+ GenericName[bg]=Визуализатор
+ GenericName[ca]=Visualitzador de documents
++GenericName[ca@valencia]=Visualitzador de documents
+ GenericName[cs]=Prohlížeč dokumentů
+ GenericName[da]=Dokumentfremviser
+ GenericName[de]=Dokumentenbetrachter
+@@ -69,6 +71,7 @@
+ GenericName[gl]=Visor de documentos
+ GenericName[hi]=दस्तावेज़ प्रदर्शक
+ GenericName[hne]=कागद प्रदर्सक
++GenericName[hr]=Preglednik dokumenata
+ GenericName[hu]=Dokumentumnézegető
+ GenericName[is]=Skjalaskoðari
+ GenericName[it]=Visore di documenti
+diff -Nur kdegraphics-4.3.4/okular/generators/tiff/okularTiff.desktop kdegraphics-4.3.5/okular/generators/tiff/okularTiff.desktop
+--- kdegraphics-4.3.4/okular/generators/tiff/okularTiff.desktop	2009-11-27 14:03:13.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/tiff/okularTiff.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -3,6 +3,7 @@
+ Name=Okular
+ Name[ar]=اوكلار
+ Name[ca]=Okular
++Name[ca@valencia]=Okular
+ Name[cs]=Okular
+ Name[da]=Okular
+ Name[de]=Okular
+diff -Nur kdegraphics-4.3.4/okular/generators/xps/libokularGenerator_xps.desktop kdegraphics-4.3.5/okular/generators/xps/libokularGenerator_xps.desktop
+--- kdegraphics-4.3.4/okular/generators/xps/libokularGenerator_xps.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/xps/libokularGenerator_xps.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -3,6 +3,7 @@
+ Name=Okular XPS Plugin
+ Name[ar]=ملحق XPS لأوكلار
+ Name[ca]=Connector XPS per a l'Okular
++Name[ca@valencia]=Connector XPS per a l'Okular
+ Name[cs]=Modul XPS pro Okular
+ Name[da]=XPS-plugin til Okular
+ Name[de]=XPS-Modul für Okular
+@@ -16,6 +17,7 @@
+ Name[ga]=Breiseán XPS Okular
+ Name[gl]=Extensión XPS para Okular
+ Name[hne]=ओकुलर एक्सपीएस प्लगइन
++Name[hr]=XPS-priključak za Okular
+ Name[hu]=XPS-bővítmény az Okularhoz
+ Name[is]=Okular XPS íforritið
+ Name[it]=Plugin XPF per Okular
+@@ -49,6 +51,7 @@
+ Comment=XPS backend for Okular
+ Comment[ar]=المنتهى الخلفي XPS لأوكلار
+ Comment[ca]=Dorsal d'XPS per a l'Okular
++Comment[ca@valencia]=Dorsal d'XPS per a l'Okular
+ Comment[da]=XPS-motor til Okular
+ Comment[de]=Anzeigemodul für XPS in Okular
+ Comment[el]=Σύστημα υποστήριξης XPS για το Okular
+@@ -61,6 +64,7 @@
+ Comment[ga]=Inneall XPS le haghaidh Okular
+ Comment[gl]=Infraestrutura de XPS para Okular
+ Comment[hne]=ओकुलर बर एक्सपीएस बैकएन्ड
++Comment[hr]=Podrška za XPS za Okular
+ Comment[hu]=XPS-bővítmény az Okularhoz
+ Comment[is]=XPS stuðningur fyrir Okular
+ Comment[it]=Backend XPF per Okular
+@@ -87,7 +91,7 @@
+ Comment[sv]=XPS-gränssnitt för Okular
+ Comment[th]=แบ็คเอนต์แฟ้ม XPS สำหรับ Okular
+ Comment[tr]=Okular için XPS arka ucu
+-Comment[uk]=Втулка XPS для Okular
++Comment[uk]=Додаток XPS для Okular
+ Comment[x-test]=xxXPS backend for Okularxx
+ Comment[zh_CN]=Okular 的 XPS 格式后端
+ Comment[zh_TW]=Okular 的 XPS 後端
+diff -Nur kdegraphics-4.3.4/okular/generators/xps/okularApplication_xps.desktop kdegraphics-4.3.5/okular/generators/xps/okularApplication_xps.desktop
+--- kdegraphics-4.3.4/okular/generators/xps/okularApplication_xps.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/xps/okularApplication_xps.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -4,6 +4,7 @@
+ Name=Okular
+ Name[ar]=اوكلار
+ Name[ca]=Okular
++Name[ca@valencia]=Okular
+ Name[cs]=Okular
+ Name[da]=Okular
+ Name[de]=Okular
+@@ -53,6 +54,7 @@
+ GenericName[ar]=عارض المستندات
+ GenericName[bg]=Визуализатор
+ GenericName[ca]=Visualitzador de documents
++GenericName[ca@valencia]=Visualitzador de documents
+ GenericName[cs]=Prohlížeč dokumentů
+ GenericName[da]=Dokumentfremviser
+ GenericName[de]=Dokumentenbetrachter
+@@ -69,6 +71,7 @@
+ GenericName[gl]=Visor de documentos
+ GenericName[hi]=दस्तावेज़ प्रदर्शक
+ GenericName[hne]=कागद प्रदर्सक
++GenericName[hr]=Preglednik dokumenata
+ GenericName[hu]=Dokumentumnézegető
+ GenericName[is]=Skjalaskoðari
+ GenericName[it]=Visore di documenti
+diff -Nur kdegraphics-4.3.4/okular/generators/xps/okularXps.desktop kdegraphics-4.3.5/okular/generators/xps/okularXps.desktop
+--- kdegraphics-4.3.4/okular/generators/xps/okularXps.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/generators/xps/okularXps.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -3,6 +3,7 @@
+ Name=Okular
+ Name[ar]=اوكلار
+ Name[ca]=Okular
++Name[ca@valencia]=Okular
+ Name[cs]=Okular
+ Name[da]=Okular
+ Name[de]=Okular
+diff -Nur kdegraphics-4.3.4/okular/okular_part.desktop kdegraphics-4.3.5/okular/okular_part.desktop
+--- kdegraphics-4.3.4/okular/okular_part.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/okular_part.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -3,6 +3,7 @@
+ Name=Okular
+ Name[ar]=اوكلار
+ Name[ca]=Okular
++Name[ca@valencia]=Okular
+ Name[cs]=Okular
+ Name[da]=Okular
+ Name[de]=Okular
+diff -Nur kdegraphics-4.3.4/okular/shell/okular.desktop kdegraphics-4.3.5/okular/shell/okular.desktop
+--- kdegraphics-4.3.4/okular/shell/okular.desktop	2009-11-27 14:03:13.000000000 +0100
++++ kdegraphics-4.3.5/okular/shell/okular.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -3,6 +3,7 @@
+ Name=Okular
+ Name[ar]=اوكلار
+ Name[ca]=Okular
++Name[ca@valencia]=Okular
+ Name[cs]=Okular
+ Name[da]=Okular
+ Name[de]=Okular
+@@ -52,6 +53,7 @@
+ GenericName[ar]=عارض المستندات
+ GenericName[bg]=Визуализатор
+ GenericName[ca]=Visualitzador de documents
++GenericName[ca@valencia]=Visualitzador de documents
+ GenericName[cs]=Prohlížeč dokumentů
+ GenericName[da]=Dokumentfremviser
+ GenericName[de]=Dokumentenbetrachter
+@@ -68,6 +70,7 @@
+ GenericName[gl]=Visor de documentos
+ GenericName[hi]=दस्तावेज़ प्रदर्शक
+ GenericName[hne]=कागद प्रदर्सक
++GenericName[hr]=Preglednik dokumenata
+ GenericName[hu]=Dokumentumnézegető
+ GenericName[is]=Skjalaskoðari
+ GenericName[it]=Visore di documenti
+diff -Nur kdegraphics-4.3.4/okular/VERSION kdegraphics-4.3.5/okular/VERSION
+--- kdegraphics-4.3.4/okular/VERSION	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/okular/VERSION	2010-01-21 21:47:47.000000000 +0100
+@@ -1 +1 @@
+-okular v0.9.4
++okular v0.9.5
+diff -Nur kdegraphics-4.3.4/strigi-analyzer/dds/kfile_dds.desktop kdegraphics-4.3.5/strigi-analyzer/dds/kfile_dds.desktop
+--- kdegraphics-4.3.4/strigi-analyzer/dds/kfile_dds.desktop	2009-10-02 10:20:17.000000000 +0200
++++ kdegraphics-4.3.5/strigi-analyzer/dds/kfile_dds.desktop	2010-01-21 21:47:46.000000000 +0100
+@@ -4,6 +4,7 @@
+ Name[ar]=معلومات السطح لـ DirectDraw
+ Name[bg]=DirectDraw Surface Info
+ Name[ca]=Informació de superfície DirectDraw
++Name[ca@valencia]=Informació de superfície DirectDraw
+ Name[cs]=DirectDraw Surface info
+ Name[da]=DirectDraw overflade-info
+ Name[de]=DirectDraw-Oberflächen-Info
+@@ -21,6 +22,7 @@
+ Name[he]=מיגע אודות משטח DirectDraw
+ Name[hi]=डायरेक्ट-ड्रा सरफेस जानकारी
+ Name[hne]=डायरेक्ट-ड्रा सरफेस जानकारी
++Name[hr]=Informacije DirectDraw Surfacea
+ Name[hu]=DirectDraw felületinformáció
+ Name[is]=DirectDraw yfirborðs upplýsingar
+ Name[it]=Informazioni superficie DirectDraw
+diff -Nur kdegraphics-4.3.4/strigi-analyzer/dvi/kfile_dvi.desktop kdegraphics-4.3.5/strigi-analyzer/dvi/kfile_dvi.desktop
+--- kdegraphics-4.3.4/strigi-analyzer/dvi/kfile_dvi.desktop	2009-11-27 14:03:12.000000000 +0100
++++ kdegraphics-4.3.5/strigi-analyzer/dvi/kfile_dvi.desktop	2010-01-21 21:47:46.000000000 +0100
+@@ -6,6 +6,7 @@
+ Name[bg]=DVI Info
+ Name[br]=Titouroù DVI
+ Name[ca]=Informació de DVI
++Name[ca@valencia]=Informació de DVI
+ Name[cs]=DVI info
+ Name[cy]=Gwybodaeth DVI
+ Name[da]=DVI-info
+@@ -24,6 +25,7 @@
+ Name[he]=מידע DVI
+ Name[hi]=डीवीआई जानकारी
+ Name[hne]=डीवीआई जानकारी
++Name[hr]=DVI-informacije
+ Name[hu]=DVI-jellemzők
+ Name[is]=DVI upplýsingar
+ Name[it]=Informazioni DVI
+diff -Nur kdegraphics-4.3.4/strigi-analyzer/exr/kfile_exr.desktop kdegraphics-4.3.5/strigi-analyzer/exr/kfile_exr.desktop
+--- kdegraphics-4.3.4/strigi-analyzer/exr/kfile_exr.desktop	2009-11-27 14:03:12.000000000 +0100
++++ kdegraphics-4.3.5/strigi-analyzer/exr/kfile_exr.desktop	2010-01-21 21:47:46.000000000 +0100
+@@ -5,6 +5,7 @@
+ Name[bg]=EXR Info
+ Name[br]=Titouroù EXR
+ Name[ca]=Informació EXR
++Name[ca@valencia]=Informació EXR
+ Name[cs]=EXR info
+ Name[cy]=Gwybodaeth EXR
+ Name[da]=EXR-Info
+@@ -23,6 +24,7 @@
+ Name[he]=מידע EXR
+ Name[hi]=ईएक्सआर जानकारी
+ Name[hne]=ईएक्सआर जानकारी
++Name[hr]=EXR-informacije
+ Name[hu]=EXR-jellemzők
+ Name[is]=EXR upplýsingar
+ Name[it]=Informazioni EXR
+diff -Nur kdegraphics-4.3.4/strigi-analyzer/pnm/kfile_pnm.desktop kdegraphics-4.3.5/strigi-analyzer/pnm/kfile_pnm.desktop
+--- kdegraphics-4.3.4/strigi-analyzer/pnm/kfile_pnm.desktop	2009-11-27 14:03:12.000000000 +0100
++++ kdegraphics-4.3.5/strigi-analyzer/pnm/kfile_pnm.desktop	2010-01-21 21:47:46.000000000 +0100
+@@ -5,6 +5,7 @@
+ Name[bg]=PNM Info
+ Name[br]=Titouroù PNM
+ Name[ca]=Informació de PNM
++Name[ca@valencia]=Informació de PNM
+ Name[cs]=PNM info
+ Name[cy]=Gybodaeth PNM
+ Name[da]=PNG-info
+@@ -23,6 +24,7 @@
+ Name[he]=מידע PNM
+ Name[hi]=पीएनएम जानकारी
+ Name[hne]=पीएनवाम जानकारी
++Name[hr]=PNM-informacije
+ Name[hu]=PNM-jellemzők
+ Name[is]=PNM upplýsingar
+ Name[it]=Informazioni PNM
+diff -Nur kdegraphics-4.3.4/strigi-analyzer/raw/kfile_raw.desktop kdegraphics-4.3.5/strigi-analyzer/raw/kfile_raw.desktop
+--- kdegraphics-4.3.4/strigi-analyzer/raw/kfile_raw.desktop	2009-11-27 14:03:12.000000000 +0100
++++ kdegraphics-4.3.5/strigi-analyzer/raw/kfile_raw.desktop	2010-01-21 21:47:46.000000000 +0100
+@@ -5,6 +5,7 @@
+ Name[bg]=RAW Camera Files
+ Name[br]=Restroù kamera kriz
+ Name[ca]=Fitxers RAW de càmera
++Name[ca@valencia]=Fitxers RAW de càmera
+ Name[cs]=RAW soubory
+ Name[da]=RAW kamera-filer
+ Name[de]=RAW-Kamera-Dateien
+@@ -22,6 +23,7 @@
+ Name[he]=קבצי מצלמה דיגיטלית גולמיים
+ Name[hi]=रॉ कैमरा फ़ाइलें
+ Name[hne]=रा कैमरा फाइल मन ल
++Name[hr]=Datoteke RAW
+ Name[hu]=RAW-fájlok
+ Name[is]=RAW myndavélaskrár
+ Name[it]=File grezzi fotocamera digitale
+diff -Nur kdegraphics-4.3.4/strigi-analyzer/rgb/kfile_rgb.desktop kdegraphics-4.3.5/strigi-analyzer/rgb/kfile_rgb.desktop
+--- kdegraphics-4.3.4/strigi-analyzer/rgb/kfile_rgb.desktop	2009-10-02 10:20:17.000000000 +0200
++++ kdegraphics-4.3.5/strigi-analyzer/rgb/kfile_rgb.desktop	2010-01-21 21:47:46.000000000 +0100
+@@ -5,6 +5,7 @@
+ Name[bg]=SGI Image (RGB)
+ Name[br]=Skeudenn SGI (RGB)
+ Name[ca]=Imatge SGI (RGB)
++Name[ca@valencia]=Imatge SGI (RGB)
+ Name[cs]=SGI obrázek (RGB)
+ Name[cy]=Delwedd SGI (RGB)
+ Name[da]=SGI-billede (RGB)
+@@ -23,7 +24,7 @@
+ Name[he]=תמונת SGI (RGB)
+ Name[hi]=एसजीआई छवि (आरजीबी)
+ Name[hne]=एसजीआई फोटू (आरजीबी)
+-Name[hr]=SGI slika (RGB)
++Name[hr]=SGI-slika (RGB)
+ Name[hu]=SGI-kép (RGB)
+ Name[is]=SGI mynd (RGB)
+ Name[it]=Immagine SGI (RGB)
+diff -Nur kdegraphics-4.3.4/strigi-analyzer/tiff/kfile_tiff.desktop kdegraphics-4.3.5/strigi-analyzer/tiff/kfile_tiff.desktop
+--- kdegraphics-4.3.4/strigi-analyzer/tiff/kfile_tiff.desktop	2009-11-27 14:03:12.000000000 +0100
++++ kdegraphics-4.3.5/strigi-analyzer/tiff/kfile_tiff.desktop	2010-01-21 21:47:46.000000000 +0100
+@@ -6,6 +6,7 @@
+ Name[bg]=TIFF File Meta Info
+ Name[br]=Meta-titouroù ar restr TIFF
+ Name[ca]=Metainformació de fitxer TIFF
++Name[ca@valencia]=Metainformació de fitxer TIFF
+ Name[cs]=Metainformace obrázku typu TIFF
+ Name[cy]=Meta-wybodaeth Ffeil TIFF
+ Name[da]=TIFF Fil-meta-info
+@@ -24,7 +25,7 @@
+ Name[he]=מידע TIFF
+ Name[hi]=टिफ़ फ़ाइल मेटा जानकारी
+ Name[hne]=टिफ फाइल मेटा जानकारी
+-Name[hr]=TIFF meta informacije
++Name[hr]=Meta informacije o TIFF-u
+ Name[hu]=TIFF-metajellemzők
+ Name[is]=TIFF File Meta upplýsingar
+ Name[it]=Informazioni TIFF
+diff -Nur kdegraphics-4.3.4/strigi-analyzer/xps/kfile_xps.desktop kdegraphics-4.3.5/strigi-analyzer/xps/kfile_xps.desktop
+--- kdegraphics-4.3.4/strigi-analyzer/xps/kfile_xps.desktop	2009-11-27 14:03:12.000000000 +0100
++++ kdegraphics-4.3.5/strigi-analyzer/xps/kfile_xps.desktop	2010-01-21 21:47:46.000000000 +0100
+@@ -4,6 +4,7 @@
+ Name[ar]=معلومات ورقة المواصفات لـ XML
+ Name[bg]=XML Paper Specification Info
+ Name[ca]=Informació d'especificació del paper en XML
++Name[ca@valencia]=Informació d'especificació del paper en XML
+ Name[da]=XML Paper Specification Info
+ Name[de]=XML-Papierspezifikations-Info
+ Name[el]=Πληροφορίες καθορισμού χαρτιού XML
+@@ -18,6 +19,7 @@
+ Name[gl]=Información da especificación de artigo XML
+ Name[hi]=एक्सएमएल पेपर विशेषता जानकारी
+ Name[hne]=एक्सएमएल पेपर विसेसता जानकारी
++Name[hr]=Informacije XML Paper Specificationa
+ Name[hu]=XML papírmegadási jellemzők
+ Name[is]=XML pappírar - skilgreiningar
+ Name[it]=Informazioni PaperSpecification XML
+diff -Nur kdegraphics-4.3.4/svgpart/svgpart.desktop kdegraphics-4.3.5/svgpart/svgpart.desktop
+--- kdegraphics-4.3.4/svgpart/svgpart.desktop	2009-11-27 14:03:12.000000000 +0100
++++ kdegraphics-4.3.5/svgpart/svgpart.desktop	2010-01-21 21:47:46.000000000 +0100
+@@ -3,6 +3,7 @@
+ Name=Svg Part
+ Name[ar]=جزء Svg
+ Name[ca]=Svg Part
++Name[ca@valencia]=Svg Part
+ Name[cs]=SVG komponenta
+ Name[da]=Svg Part
+ Name[de]=SVG-Komponente
+@@ -17,6 +18,7 @@
+ Name[ga]=Comhpháirt Svg
+ Name[gl]=Compoñente de SVG
+ Name[hne]=एसवीजी पार्ट
++Name[hr]=Svg Part
+ Name[hu]=SVG objektum
+ Name[is]=Svg hlutur
+ Name[it]=Componente SVG
+diff -Nur kdegraphics-4.3.4/thumbnailers/mobi/mobithumbnail.desktop kdegraphics-4.3.5/thumbnailers/mobi/mobithumbnail.desktop
+--- kdegraphics-4.3.4/thumbnailers/mobi/mobithumbnail.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/thumbnailers/mobi/mobithumbnail.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -3,6 +3,7 @@
+ Name=Mobipocket thumbnailer
+ Name[ar]=مولد مصغرات Mobipocket
+ Name[ca]=Miniaturitzador de Mobipocket
++Name[ca@valencia]=Miniaturitzador de Mobipocket
+ Name[da]=Mobipocket-miniaturer
+ Name[de]=Mobipocket-Minibild
+ Name[el]=Δημιουργία εικόνων επισκόπησης Mobipocket
+@@ -13,6 +14,7 @@
+ Name[fr]=Création de miniatures Mobipocket
+ Name[ga]=Mionsamhlóir Mobipocket
+ Name[gl]=Miniaturas de Mobipocket
++Name[hr]=Generator sličica za Mobipocket
+ Name[hu]=Mobipocket betekintő
+ Name[is]=Mobipocket smámyndagerð
+ Name[it]=Generatore anteprime Mobipocket
+diff -Nur kdegraphics-4.3.4/thumbnailers/ps/gsthumbnail.desktop kdegraphics-4.3.5/thumbnailers/ps/gsthumbnail.desktop
+--- kdegraphics-4.3.4/thumbnailers/ps/gsthumbnail.desktop	2009-10-02 10:20:20.000000000 +0200
++++ kdegraphics-4.3.5/thumbnailers/ps/gsthumbnail.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -5,6 +5,7 @@
+ Name[bg]=PostScript, PDF and DVI Files
+ Name[br]=Restroù PostScript, PDF ha DVI
+ Name[ca]=Fitxers PostScript, PDF i DVI
++Name[ca@valencia]=Fitxers PostScript, PDF i DVI
+ Name[cs]=Postscriptové, PDF a DVI soubory
+ Name[cy]=Ffeiliau PostScript, PDF a DVI
+ Name[da]=PostScript, PDF- og DVI-filer
+@@ -23,6 +24,7 @@
+ Name[he]=קבצי PostScript, PDF ו־DVI
+ Name[hi]=पोस्ट-स्क्रिप्ट, पीडीएफ तथा डीवीआई फ़ाइलें
+ Name[hne]=पोस्ट-स्क्रिप्ट, पीडीएफ अउ डीवीआई फाइल मन ल
++Name[hr]=Datoteke oblika PostScript, PDF i DVI
+ Name[hu]=PostScript-, PDF- és DVI-fájlok
+ Name[is]=PostScript PDF og DVI skrár
+ Name[it]=File PostScript, PDF e DVI
+@@ -49,7 +51,7 @@
+ Name[sk]=PostScript, PDF a DVI súbory
+ Name[sl]=Datoteke PostScript, PDF in DVI
+ Name[sr]=Постскрипт, ПДФ и ДВИ фајлови
+-Name[sr@latin]=Postscript, PDF i DVI fajlovi
++Name[sr@latin]=PostScript, PDF i DVI fajlovi
+ Name[sv]=Postscript, PDF och DVI-filer
+ Name[ta]= போஸ்ட்கிரிப்ட், பிடிஃப் மற்றும் டிவிஐ கோப்புகள்
+ Name[tg]=Файлҳои PostScript, PDF ва DVI
+diff -Nur kdegraphics-4.3.4/thumbnailers/raw/rawthumbnail.desktop kdegraphics-4.3.5/thumbnailers/raw/rawthumbnail.desktop
+--- kdegraphics-4.3.4/thumbnailers/raw/rawthumbnail.desktop	2009-11-27 14:03:14.000000000 +0100
++++ kdegraphics-4.3.5/thumbnailers/raw/rawthumbnail.desktop	2010-01-21 21:47:47.000000000 +0100
+@@ -3,6 +3,7 @@
+ Name=RAW Photo Camera files
+ Name[ar]=الملفات الخامة RAW لآلة التصوير
+ Name[ca]=Fitxers RAW de càmera de fotos
++Name[ca@valencia]=Fitxers RAW de càmera de fotos
+ Name[cs]=RAW soubory z fotoaparátu
+ Name[da]=RAW kamera-filer
+ Name[de]=RAW-Fotokamera-Dateien
+@@ -12,6 +13,7 @@
+ Name[et]=Kaamera toorfailid
+ Name[fr]=Fichiers RAW d'appareil photo numérique
+ Name[gl]=Ficheiros RAW de cámara de fotos
++Name[hr]=Fotografske datoteke RAW
+ Name[hu]=RAW-fájlok
+ Name[is]=RAW myndavélaskrár
+ Name[it]=File grezzi fotocamera digitale
